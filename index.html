@@ -1,6 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MB Capital Group - Complete Platform</title>
+    <style>
+        .nav-tabs { background: #1e3a8a; padding: 10px; }
+        .nav-tabs button { background: #fbbf24; border: none; padding: 10px 20px; margin: 0 5px; cursor: pointer; border-radius: 5px; }
+        .nav-tabs button:hover { background: #f59e0b; }
+        .content-area { min-height: 90vh; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body>
+    <div class="nav-tabs">
+        <button onclick="showTab('main')">Main Website</button>
+        <button onclick="showTab('admin')">Admin Dashboard</button>
+        <button onclick="showTab('investor')">Investor Portal</button>
+        <button onclick="showTab('taxcalc')">Tax Calculator</button>
+        <button onclick="showTab('ai')">AI Recommendations</button>
+    </div>
+    
+    <div class="content-area">
+        <div id="main" class="tab-content active">
+            
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MB Capital Group - Multifamily Real Estate Syndication Investments | Class B & C Properties</title>
@@ -221,6 +247,2564 @@
             e.preventDefault();
             alert('Thank you for your interest! We will contact you within 24 hours to discuss investment opportunities.');
         });
+    </script>
+</body>
+
+        </div>
+        <div id="admin" class="tab-content">
+            
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin User Management - MB Capital Group</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8fafc; color: #334155; }
+        
+        .header { background: hsl(219, 79%, 24%); color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; }
+        .nav-links { display: flex; gap: 1rem; }
+        .nav-links a { color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px; transition: background-color 0.2s; }
+        .nav-links a:hover { background: rgba(255,255,255,0.1); }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .page-title { font-size: 2rem; margin-bottom: 2rem; color: hsl(219, 79%, 24%); }
+        
+        .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+        
+        .card { background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .card h3 { margin-bottom: 1.5rem; color: hsl(219, 79%, 24%); display: flex; align-items: center; gap: 0.5rem; }
+        
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151; }
+        .form-group input, .form-group select { width: 100%; padding: 0.75rem; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: hsl(219, 79%, 24%); }
+        
+        .btn { padding: 0.75rem 1.5rem; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .btn-primary { background: hsl(219, 79%, 24%); color: white; }
+        .btn-primary:hover { background: hsl(219, 79%, 20%); }
+        .btn-danger { background: #dc2626; color: white; }
+        .btn-danger:hover { background: #b91c1c; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .admin-list { background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .admin-list h3 { margin-bottom: 1.5rem; color: hsl(219, 79%, 24%); }
+        
+        .admin-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem; border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 1rem; }
+        .admin-info { flex: 1; }
+        .admin-username { font-weight: 600; color: #1f2937; }
+        .admin-created { color: #64748b; font-size: 0.9rem; }
+        .admin-actions { display: flex; gap: 0.5rem; }
+        
+        .message { padding: 1rem; border-radius: 8px; margin-bottom: 1rem; }
+        .message.success { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+        .message.error { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+        
+        .current-admin { background: #f0f9ff; border-color: #0ea5e9; }
+        .current-admin-badge { background: #0ea5e9; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; }
+        
+        @media (max-width: 768px) {
+            .admin-grid { grid-template-columns: 1fr; }
+            .admin-item { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .admin-actions { width: 100%; justify-content: flex-end; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">MB Capital Group - Admin Users</div>
+        <div class="nav-links">
+            <a href="/admin">← Back to Dashboard</a>
+            <a href="/" target="_blank">View Website</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h1 class="page-title">Admin User Management</h1>
+        
+        <div id="message" class="message" style="display: none;"></div>
+        
+        <div class="admin-grid">
+            <!-- Create New Admin -->
+            <div class="card">
+                <h3>👤 Create New Admin Account</h3>
+                <form id="createAdminForm" onsubmit="createAdmin(event)">
+                    <div class="form-group">
+                        <label for="newUsername">Username</label>
+                        <input type="text" id="newUsername" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">Password</label>
+                        <input type="password" id="newPassword" name="password" required minlength="8">
+                        <small style="color: #64748b;">Minimum 8 characters</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required minlength="8">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create Admin Account</button>
+                </form>
+            </div>
+            
+            <!-- Instructions -->
+            <div class="card">
+                <h3>📋 Instructions for Testers</h3>
+                <p style="margin-bottom: 1rem; color: #64748b;">Share these credentials with trusted testers:</p>
+                <ul style="margin-left: 1.5rem; color: #64748b; line-height: 1.6;">
+                    <li><strong>Admin URL:</strong> <code>[your-replit-url]/admin</code></li>
+                    <li><strong>Username:</strong> Provide the username you create</li>
+                    <li><strong>Password:</strong> Provide the password you create</li>
+                </ul>
+                <div style="margin-top: 1.5rem; padding: 1rem; background: #f0f9ff; border-radius: 8px;">
+                    <p style="font-weight: 600; color: #0ea5e9; margin-bottom: 0.5rem;">Security Tips:</p>
+                    <ul style="margin-left: 1.5rem; color: #0369a1; font-size: 0.9rem; line-height: 1.6;">
+                        <li>Create separate accounts for each tester</li>
+                        <li>Delete accounts when testing is complete</li>
+                        <li>Use simple, temporary passwords for testing</li>
+                        <li>Monitor admin activity during testing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Admin List -->
+        <div class="admin-list">
+            <h3>👥 Current Admin Accounts</h3>
+            <div id="adminsList">
+                <p style="color: #64748b;">Loading admin accounts...</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let currentAdminId = null;
+        
+        // Load admin accounts on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAdmins();
+            getCurrentAdmin();
+        });
+        
+        async function getCurrentAdmin() {
+            try {
+                const response = await fetch('/api/admin/status');
+                const data = await response.json();
+                if (data.isAuthenticated && data.admin) {
+                    currentAdminId = data.admin.adminId;
+                }
+            } catch (error) {
+                console.error('Failed to get current admin:', error);
+            }
+        }
+        
+        async function createAdmin(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const username = formData.get('username');
+            const password = formData.get('password');
+            const confirmPassword = formData.get('confirmPassword');
+            
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                showMessage('Passwords do not match', 'error');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/admin/create-admin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    showMessage(`Admin account "${username}" created successfully!`, 'success');
+                    event.target.reset();
+                    loadAdmins(); // Refresh the list
+                } else {
+                    showMessage(result.error || 'Failed to create admin account', 'error');
+                }
+            } catch (error) {
+                console.error('Create admin error:', error);
+                showMessage('Failed to create admin account. Please try again.', 'error');
+            }
+        }
+        
+        async function loadAdmins() {
+            try {
+                const response = await fetch('/api/admin/list-admins');
+                const admins = await response.json();
+                
+                const adminsList = document.getElementById('adminsList');
+                
+                if (admins.length === 0) {
+                    adminsList.innerHTML = '<p style="color: #64748b;">No admin accounts found.</p>';
+                    return;
+                }
+                
+                adminsList.innerHTML = admins.map(admin => {
+                    const isCurrentAdmin = admin.id === currentAdminId;
+                    const createdDate = new Date(admin.createdAt).toLocaleDateString();
+                    
+                    return `
+                        <div class="admin-item ${isCurrentAdmin ? 'current-admin' : ''}">
+                            <div class="admin-info">
+                                <div class="admin-username">
+                                    ${admin.username}
+                                    ${isCurrentAdmin ? '<span class="current-admin-badge">You</span>' : ''}
+                                </div>
+                                <div class="admin-created">Created: ${createdDate}</div>
+                            </div>
+                            <div class="admin-actions">
+                                ${!isCurrentAdmin ? `
+                                    <button class="btn btn-danger" onclick="deleteAdmin(${admin.id}, '${admin.username}')">
+                                        Delete
+                                    </button>
+                                ` : ''}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } catch (error) {
+                console.error('Load admins error:', error);
+                document.getElementById('adminsList').innerHTML = 
+                    '<p style="color: #dc2626;">Failed to load admin accounts.</p>';
+            }
+        }
+        
+        async function deleteAdmin(adminId, username) {
+            if (!confirm(`Are you sure you want to delete the admin account "${username}"? This action cannot be undone.`)) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/api/admin/delete-admin/${adminId}`, {
+                    method: 'DELETE'
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    showMessage(`Admin account "${username}" deleted successfully`, 'success');
+                    loadAdmins(); // Refresh the list
+                } else {
+                    showMessage(result.error || 'Failed to delete admin account', 'error');
+                }
+            } catch (error) {
+                console.error('Delete admin error:', error);
+                showMessage('Failed to delete admin account. Please try again.', 'error');
+            }
+        }
+        
+        function showMessage(message, type) {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = message;
+            messageEl.className = `message ${type}`;
+            messageEl.style.display = 'block';
+            
+            // Auto-hide success messages after 5 seconds
+            if (type === 'success') {
+                setTimeout(() => {
+                    messageEl.style.display = 'none';
+                }, 5000);
+            }
+        }
+    </script>
+</body>
+
+        </div>
+        <div id="investor" class="tab-content">
+            
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Investor Portal - MB Capital Group Multifamily Syndications</title>
+    <meta name="description" content="Secure investor portal for MB Capital Group syndication partners. Access investment documents, performance reports, quarterly distribution updates, and exclusive market insights." />
+    <meta name="keywords" content="investor portal, multifamily syndication portal, real estate investor dashboard, investment documents, quarterly distributions, performance reports" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="canonical" href="https://mbcapitalgroup.com/investor-portal.html" />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "MB Capital Group Investor Portal",
+      "description": "Secure portal for multifamily real estate syndication investors",
+      "url": "https://mbcapitalgroup.com/investor-portal.html",
+      "applicationCategory": "FinanceApplication",
+      "provider": {
+        "@type": "Organization",
+        "name": "MB Capital Group"
+      }
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8fafc; color: #334155; }
+        
+        /* Header */
+        .header { background: hsl(219, 79%, 24%); color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .logo { display: flex; align-items: center; gap: 0.75rem; font-size: 1.5rem; font-weight: bold; }
+        .logo img { height: 40px; width: auto; }
+        .user-info { display: flex; align-items: center; gap: 1rem; }
+        .logout-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; transition: background-color 0.2s; }
+        .logout-btn:hover { background: rgba(255,255,255,0.2); }
+        
+        /* Login Form */
+        .login-container { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, hsl(219, 79%, 24%) 0%, hsl(219, 79%, 35%) 100%); }
+        .login-form { background: white; padding: 3rem; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); max-width: 400px; width: 100%; }
+        .login-form h1 { color: hsl(219, 79%, 24%); margin-bottom: 0.5rem; text-align: center; }
+        .login-form p { color: #64748b; text-align: center; margin-bottom: 2rem; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151; }
+        .form-group input { width: 100%; padding: 0.75rem; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; transition: border-color 0.2s; }
+        .form-group input:focus { outline: none; border-color: hsl(219, 79%, 24%); }
+        .login-btn { width: 100%; background: hsl(219, 79%, 24%); color: white; padding: 0.75rem; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background-color 0.2s; }
+        .login-btn:hover { background: hsl(219, 79%, 20%); }
+        .error-message { color: #dc2626; text-align: center; margin-top: 1rem; padding: 0.5rem; background: #fef2f2; border-radius: 6px; }
+        
+        /* Dashboard */
+        .dashboard { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .welcome-banner { background: linear-gradient(135deg, hsl(219, 79%, 24%) 0%, hsl(219, 79%, 35%) 100%); color: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem; }
+        .welcome-banner h1 { margin-bottom: 0.5rem; }
+        .welcome-banner p { opacity: 0.9; }
+        
+        /* Stats Cards */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+        .stat-card { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .stat-icon { width: 48px; height: 48px; background: hsl(43, 96%, 49%); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-size: 1.5rem; }
+        .stat-value { font-size: 2rem; font-weight: bold; color: hsl(219, 79%, 24%); margin-bottom: 0.25rem; }
+        .stat-label { color: #64748b; font-size: 0.9rem; }
+        
+        /* Tabs */
+        .tabs { background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; }
+        .tab-buttons { display: flex; background: #f8fafc; border-bottom: 1px solid #e2e8f0; }
+        .tab-button { flex: 1; padding: 1rem; background: none; border: none; cursor: pointer; font-weight: 600; color: #64748b; transition: all 0.2s; }
+        .tab-button.active { background: white; color: hsl(219, 79%, 24%); border-bottom: 3px solid hsl(43, 96%, 49%); }
+        .tab-content { padding: 2rem; min-height: 400px; }
+        .tab-pane { display: none; }
+        .tab-pane.active { display: block; }
+        
+        /* Investment Cards */
+        .investment-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .investment-card { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+        .investment-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .investment-header h3 { color: hsl(219, 79%, 24%); margin: 0; font-size: 1.1rem; }
+        .investment-status { background: #10b981; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+        .investment-details { }
+        .detail-row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #f1f5f9; }
+        .detail-row:last-child { border-bottom: none; }
+        .detail-row span:first-child { color: #64748b; font-weight: 500; }
+        .detail-row span:last-child { color: #1e293b; font-weight: 600; }
+        .investment-title { font-size: 1.25rem; font-weight: bold; color: hsl(219, 79%, 24%); margin-bottom: 0.5rem; }
+        .investment-location { color: #64748b; margin-bottom: 1rem; }
+        .investment-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .metric { text-align: center; }
+        .metric-value { font-size: 1.25rem; font-weight: bold; color: hsl(43, 96%, 49%); }
+        .metric-label { font-size: 0.85rem; color: #64748b; }
+        
+        /* Documents */
+        .document-list { display: flex; flex-direction: column; gap: 1rem; }
+        .document-item { display: flex; justify-content: between; align-items: center; background: #f8fafc; padding: 1rem; border-radius: 8px; border: 1px solid #e2e8f0; }
+        .document-info { flex: 1; }
+        .document-name { font-weight: 600; color: hsl(219, 79%, 24%); }
+        .document-meta { color: #64748b; font-size: 0.9rem; margin-top: 0.25rem; }
+        .download-btn { background: hsl(43, 96%, 49%); color: white; padding: 0.5rem 1rem; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; transition: background-color 0.2s; }
+        .download-btn:hover { background: hsl(43, 96%, 45%); }
+        
+        /* Communications */
+        .communication-item { background: #f8fafc; padding: 1.5rem; border-radius: 8px; border-left: 4px solid hsl(43, 96%, 49%); margin-bottom: 1rem; }
+        .communication-date { color: #64748b; font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .communication-title { font-weight: 600; color: hsl(219, 79%, 24%); margin-bottom: 0.5rem; }
+        .communication-excerpt { color: #64748b; line-height: 1.6; }
+        
+        /* Performance Charts */
+        .chart-container { background: #f8fafc; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; }
+        .chart-title { font-weight: 600; color: hsl(219, 79%, 24%); margin-bottom: 1rem; }
+        .chart-placeholder { height: 200px; background: linear-gradient(135deg, #e2e8f0 0%, #f1f5f9 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #64748b; font-style: italic; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header { padding: 1rem; }
+            .dashboard { padding: 1rem; }
+            .tab-buttons { flex-direction: column; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .investment-metrics { grid-template-columns: 1fr; }
+        }
+        
+        /* Coming Soon Features */
+        .coming-soon { text-align: center; padding: 3rem; color: #64748b; }
+        .coming-soon h3 { color: hsl(219, 79%, 24%); margin-bottom: 1rem; }
+        .coming-soon p { margin-bottom: 1.5rem; }
+        .feature-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem; }
+        .feature-item { background: #f0f9ff; padding: 1rem; border-radius: 8px; border: 1px solid #bae6fd; }
+        .feature-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .feature-name { font-weight: 600; color: hsl(219, 79%, 24%); }
+        
+        /* Password Reset Styles */
+        .reset-form { max-width: 400px; margin: 0 auto; }
+        .reset-options { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
+        .reset-option { flex: 1; padding: 0.75rem; border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; text-align: center; transition: all 0.2s; }
+        .reset-option.active { border-color: hsl(219, 79%, 24%); background: hsl(219, 79%, 24%); color: white; }
+        .reset-option:hover { border-color: hsl(219, 79%, 24%); }
+        .back-button { background: #6b7280; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.9rem; margin-top: 1rem; }
+        .back-button:hover { background: #4b5563; }
+        .success-message { color: #059669; background: #d1fae5; padding: 1rem; border-radius: 6px; margin-top: 1rem; text-align: center; }
+        .reset-info { background: #f0f9ff; border: 1px solid #0ea5e9; padding: 1rem; border-radius: 6px; margin-bottom: 1rem; }
+        .reset-info h4 { color: hsl(219, 79%, 24%); margin-bottom: 0.5rem; }
+        .reset-info ul { margin: 0.5rem 0; padding-left: 1.5rem; }
+    </style>
+</head>
+<body>
+    <!-- Login Form -->
+    <div id="loginContainer" class="login-container">
+        <form class="login-form" onsubmit="handleLogin(event)">
+            <h1>Investor Portal</h1>
+            <p>Access your investment dashboard and documents</p>
+            
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div style="position: relative;">
+                    <input type="password" id="password" name="password" required>
+                    <button type="button" onclick="togglePasswordVisibility('password', 'passwordToggle')" id="passwordToggle" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #6b7280;">👁️</button>
+                </div>
+            </div>
+            
+            <button type="submit" class="login-btn">Sign In</button>
+            
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+            
+            <div style="margin-top: 1.5rem; text-align: center;">
+                <button type="button" class="login-btn" onclick="showForgotPassword()" style="background: transparent; border: 1px solid hsl(219, 79%, 24%); color: hsl(219, 79%, 24%); font-size: 0.9rem; padding: 0.5rem 1rem;">
+                    Forgot Password or Username?
+                </button>
+            </div>
+            
+            <div style="margin-top: 1.5rem; text-align: center; color: #64748b; font-size: 0.9rem;">
+                <p>Don't have portal access yet?</p>
+                <p><a href="#" onclick="showRegistration()" style="color: hsl(219, 79%, 24%);">Create Account</a> | <a href="mailto:Michael@MBCapitalGroup.com" style="color: hsl(219, 79%, 24%);">Contact Michael</a></p>
+            </div>
+            
+            <div style="margin-top: 2rem; text-align: center; border-top: 1px solid #e2e8f0; padding-top: 1rem;">
+                <a href="/" style="color: #64748b; text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+                    ← Return to Main Website
+                </a>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Registration Form -->
+    <div id="registrationContainer" class="login-container" style="display: none;">
+        <form class="login-form" onsubmit="handleRegistration(event)">
+            <h1>Create Investor Account</h1>
+            <p>Get access to your investment dashboard and exclusive opportunities</p>
+            
+            <div class="form-group">
+                <label for="regInvitationToken">Invitation Token</label>
+                <input type="text" id="regInvitationToken" name="invitationToken" required placeholder="Enter the token from your invitation email">
+            </div>
+            
+            <div class="form-group">
+                <label for="regFirstName">First Name</label>
+                <input type="text" id="regFirstName" name="firstName" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="regLastName">Last Name</label>
+                <input type="text" id="regLastName" name="lastName" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="regEmail">Email Address</label>
+                <input type="email" id="regEmail" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="regPhone">Phone Number</label>
+                <input type="tel" id="regPhone" name="phone" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="regPassword">Password</label>
+                <div style="position: relative;">
+                    <input type="password" id="regPassword" name="password" required minlength="8">
+                    <button type="button" onclick="togglePasswordVisibility('regPassword', 'regPasswordToggle')" id="regPasswordToggle" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #6b7280;">👁️</button>
+                </div>
+                <small style="color: #6b7280;">Must be at least 8 characters</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="regConfirmPassword">Confirm Password</label>
+                <div style="position: relative;">
+                    <input type="password" id="regConfirmPassword" name="confirmPassword" required minlength="8">
+                    <button type="button" onclick="togglePasswordVisibility('regConfirmPassword', 'regConfirmPasswordToggle')" id="regConfirmPasswordToggle" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #6b7280;">👁️</button>
+                </div>
+            </div>
+            
+
+            
+            <button type="submit" class="login-btn">Create Account</button>
+            
+            <div id="registrationMessage" class="success-message" style="display: none;"></div>
+            <div id="registrationError" class="error-message" style="display: none;"></div>
+            
+            <div style="margin-top: 1.5rem; text-align: center;">
+                <button type="button" class="back-button" onclick="showLogin()">← Back to Login</button>
+            </div>
+            
+            <div style="margin-top: 1rem; text-align: center; border-top: 1px solid #e2e8f0; padding-top: 1rem;">
+                <a href="/" style="color: #64748b; text-decoration: none; font-size: 0.9rem;">
+                    ← Return to Main Website
+                </a>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Password Reset Form -->
+    <div id="resetContainer" class="login-container" style="display: none;">
+        <div class="login-form">
+            <h1>Account Recovery</h1>
+            <p>Choose how you'd like to recover your account</p>
+            
+            <div class="reset-options">
+                <div class="reset-option active" onclick="selectResetOption('password')">
+                    <strong>🔑 Reset Password</strong>
+                    <p style="font-size: 0.85rem; margin-top: 0.5rem;">I know my email but forgot my password</p>
+                </div>
+                <div class="reset-option" onclick="selectResetOption('username')">
+                    <strong>📧 Get Username</strong>
+                    <p style="font-size: 0.85rem; margin-top: 0.5rem;">I forgot my username/email</p>
+                </div>
+            </div>
+            
+            <!-- Password Reset Form -->
+            <form id="passwordResetForm" class="reset-form" onsubmit="handlePasswordReset(event)">
+                <div class="reset-info">
+                    <h4>Password Reset Process:</h4>
+                    <ul>
+                        <li>Enter your email address</li>
+                        <li>Check your email for a secure reset link</li>
+                        <li>Click the link to set a new password</li>
+                        <li>Link expires in 1 hour for security</li>
+                    </ul>
+                </div>
+                
+                <div class="form-group">
+                    <label for="resetEmail">Email Address</label>
+                    <input type="email" id="resetEmail" name="email" required>
+                </div>
+                
+                <button type="submit" class="login-btn">Send Reset Link</button>
+                
+                <div id="resetMessage" class="success-message" style="display: none;"></div>
+                <div id="resetError" class="error-message" style="display: none;"></div>
+            </form>
+            
+            <!-- Username Recovery Form -->
+            <form id="usernameRecoveryForm" class="reset-form" onsubmit="handleUsernameRecovery(event)" style="display: none;">
+                <div class="reset-info">
+                    <h4>Username Recovery Process:</h4>
+                    <ul>
+                        <li>Enter your email address</li>
+                        <li>We'll send your username to your email</li>
+                        <li>Use the username to log in</li>
+                        <li>If you also forgot your password, use the reset option</li>
+                    </ul>
+                </div>
+                
+                <div class="form-group">
+                    <label for="recoveryEmail">Email Address</label>
+                    <input type="email" id="recoveryEmail" name="email" required>
+                </div>
+                
+                <button type="submit" class="login-btn">Send Username</button>
+                
+                <div id="recoveryMessage" class="success-message" style="display: none;"></div>
+                <div id="recoveryError" class="error-message" style="display: none;"></div>
+            </form>
+            
+            <div style="text-align: center;">
+                <button type="button" class="back-button" onclick="showLogin()">← Back to Login</button>
+            </div>
+            
+            <div style="margin-top: 1rem; text-align: center; border-top: 1px solid #e2e8f0; padding-top: 1rem;">
+                <a href="/" style="color: #64748b; text-decoration: none; font-size: 0.9rem;">
+                    ← Return to Main Website
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- New Password Form (for reset token) -->
+    <div id="newPasswordContainer" class="login-container" style="display: none;">
+        <div class="login-form">
+            <h1>Set New Password</h1>
+            <p>Enter your new password below</p>
+            
+            <form id="newPasswordForm" class="reset-form" onsubmit="handleNewPassword(event)">
+                <div class="form-group">
+                    <label for="newPassword">New Password</label>
+                    <input type="password" id="newPassword" name="password" required minlength="8">
+                    <small style="color: #6b7280;">Must be at least 8 characters long</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm New Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required minlength="8">
+                </div>
+                
+                <button type="submit" class="login-btn">Update Password</button>
+                
+                <div id="newPasswordMessage" class="success-message" style="display: none;"></div>
+                <div id="newPasswordError" class="error-message" style="display: none;"></div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Dashboard -->
+    <div id="dashboard" style="display: none;">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <img src="/attached_assets/Logo I think final version_1752273832987.png" alt="MB Capital Group Logo" />
+                <span>Investor Portal</span>
+            </div>
+            <div class="user-info">
+                <a href="/" style="color: white; text-decoration: none; margin-right: 1rem;">← Back to Main Site</a>
+                <span id="userName">Welcome, Investor</span>
+                <button class="logout-btn" onclick="logout()">Sign Out</button>
+            </div>
+        </div>
+        
+        <!-- Dashboard Content -->
+        <div class="dashboard">
+            <!-- Welcome Banner -->
+            <div class="welcome-banner">
+                <h1>Welcome to Your Investment Dashboard</h1>
+                <p>Track your multifamily real estate investments, view quarterly reports, and access important documents.</p>
+            </div>
+            
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-value">$0</div>
+                    <div class="stat-label">Total Investment</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📈</div>
+                    <div class="stat-value">0%</div>
+                    <div class="stat-label">Annual Return</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🏢</div>
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Active Properties</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💵</div>
+                    <div class="stat-value">$0</div>
+                    <div class="stat-label">Quarterly Distribution</div>
+                </div>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" onclick="showTab('investments')">My Investments</button>
+                    <button class="tab-button" onclick="showTab('quarterly-reports')">Quarterly Reports</button>
+                    <button class="tab-button" onclick="showTab('k1-documents')">K1 Tax Documents</button>
+                    <button class="tab-button" onclick="showTab('performance')">Performance</button>
+                    <button class="tab-button" onclick="showTab('communications')">Communications</button>
+                </div>
+                
+                <div class="tab-content">
+                    <!-- Investments Tab -->
+                    <div id="investments" class="tab-pane active">
+                        <div class="coming-soon">
+                            <h3>🚀 Your Investment Portfolio</h3>
+                            <p>Your multifamily real estate investments will appear here once you join a syndication.</p>
+                            
+                            <div class="feature-list">
+                                <div class="feature-item">
+                                    <div class="feature-icon">🏠</div>
+                                    <div class="feature-name">Property Details</div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">📊</div>
+                                    <div class="feature-name">Performance Metrics</div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">💰</div>
+                                    <div class="feature-name">Distribution History</div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">📈</div>
+                                    <div class="feature-name">Appreciation Tracking</div>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-top: 2rem;">
+                                <a href="mailto:Michael@MBCapitalGroup.com" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; background: hsl(219, 79%, 24%); color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">
+                                    📧 Inquire About Current Opportunities
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quarterly Reports Tab -->
+                    <div id="quarterly-reports" class="tab-pane">
+                        <div id="quarterlyReportsContent">
+                            <h3 style="color: hsl(219, 79%, 24%); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                📊 Quarterly Reports
+                            </h3>
+                            <p style="color: #64748b; margin-bottom: 2rem;">
+                                Access your quarterly reports for all your property investments.
+                            </p>
+                            <div id="quarterlyReportsContainer">
+                                <div style="text-align: center; padding: 2rem; color: #64748b;">
+                                    Loading quarterly reports...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- K1 Tax Documents Tab -->
+                    <div id="k1-documents" class="tab-pane">
+                        <div id="k1DocumentsContent">
+                            <h3 style="color: hsl(219, 79%, 24%); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                📄 K1 Tax Documents
+                            </h3>
+                            <p style="color: #64748b; margin-bottom: 2rem;">
+                                Download your K1 tax documents for each property investment.
+                            </p>
+                            <div id="k1DocumentsContainer">
+                                <div style="text-align: center; padding: 2rem; color: #64748b;">
+                                    Loading K1 tax documents...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Performance Tab -->
+                    <div id="performance" class="tab-pane">
+                        <div class="coming-soon">
+                            <h3>📈 Investment Performance</h3>
+                            <p>Track the performance of your real estate investments with detailed analytics.</p>
+                            
+                            <div class="chart-container">
+                                <div class="chart-title">Portfolio Performance Over Time</div>
+                                <div class="chart-placeholder">Interactive charts will display your investment performance</div>
+                            </div>
+                            
+                            <div class="feature-list">
+                                <div class="feature-item">
+                                    <div class="feature-icon">📊</div>
+                                    <div class="feature-name">Cash Flow Analysis</div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">📈</div>
+                                    <div class="feature-name">Appreciation Trends</div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">💹</div>
+                                    <div class="feature-name">IRR Calculations</div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">🎯</div>
+                                    <div class="feature-name">vs. Projections</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Communications Tab -->
+                    <div id="communications" class="tab-pane">
+                        <div class="coming-soon">
+                            <h3>📬 Updates & Communications</h3>
+                            <p>Stay informed with property updates, market insights, and company announcements.</p>
+                            
+                            <div class="feature-list">
+                                <div class="feature-item">
+                                    <div class="feature-icon">📧</div>
+                                    <div class="feature-name">Property Updates</div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">📰</div>
+                                    <div class="feature-name">Market Reports</div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">📅</div>
+                                    <div class="feature-name">Event Notifications</div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">💬</div>
+                                    <div class="feature-name">Direct Messaging</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Tab functionality
+        function showTab(tabName) {
+            // Hide all tab panes
+            document.querySelectorAll('.tab-pane').forEach(pane => {
+                pane.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab and activate button
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+            
+            // Load data when specific tabs are selected
+            if (tabName === 'quarterly-reports') {
+                loadQuarterlyReports();
+            } else if (tabName === 'k1-documents') {
+                loadK1Documents();
+            }
+        }
+        
+        // Load quarterly reports and K1 documents
+        async function loadDocuments() {
+            await Promise.all([
+                loadQuarterlyReports(),
+                loadK1Documents()
+            ]);
+        }
+        
+        // Load quarterly reports
+        async function loadQuarterlyReports() {
+            try {
+                const response = await fetch('/api/investor/quarterly-reports', {
+                    credentials: 'include'
+                });
+                
+                if (response.status === 401) {
+                    // Not authenticated - redirect to login
+                    logout();
+                    showError('Session expired. Please log in again.');
+                    return;
+                }
+                
+                if (!response.ok) {
+                    throw new Error('Failed to load quarterly reports');
+                }
+                
+                const reports = await response.json();
+                const container = document.getElementById('quarterlyReportsContainer');
+                
+                if (reports.length === 0) {
+                    container.innerHTML = `
+                        <div style="text-align: center; padding: 2rem; color: #64748b; background: #f8fafc; border-radius: 8px; border: 1px dashed #cbd5e1;">
+                            <div style="font-size: 2rem; margin-bottom: 1rem;">📊</div>
+                            <h4 style="margin-bottom: 0.5rem;">No Quarterly Reports Available</h4>
+                            <p>Quarterly reports will appear here once they are published by MB Capital Group.</p>
+                        </div>
+                    `;
+                } else {
+                    container.innerHTML = reports.map(report => `
+                        <div style="border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; background: white;">
+                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                                <div>
+                                    <h5 style="margin: 0 0 0.5rem 0; color: hsl(219, 79%, 24%); font-weight: 600;">
+                                        ${report.reportTitle || 'Property Report'}
+                                    </h5>
+                                    <p style="margin: 0; color: #64748b; font-size: 0.9rem;">
+                                        ${report.reportQuarter} ${report.reportYear}
+                                    </p>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="background: #f0f9ff; color: #0369a1; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem; font-weight: 500;">
+                                        Published
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            ${report.reportSummary ? `<p style="color: #64748b; margin-bottom: 1rem; font-size: 0.9rem;">${report.reportSummary}</p>` : ''}
+                            
+                            <div style="display: flex; gap: 1rem; align-items: center;">
+                                <a href="${report.pdfUrl}" target="_blank" 
+                                   style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: hsl(219, 79%, 24%); color: white; text-decoration: none; border-radius: 6px; font-size: 0.9rem; transition: background 0.3s;">
+                                    📄 View Report
+                                </a>
+                                <span style="color: #64748b; font-size: 0.8rem;">
+                                    Published: ${new Date(report.createdAt).toLocaleDateString()}
+                                </span>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            } catch (error) {
+                console.error('Error loading quarterly reports:', error);
+                document.getElementById('quarterlyReportsContainer').innerHTML = `
+                    <div style="text-align: center; padding: 2rem; color: #dc2626; background: #fee2e2; border-radius: 8px; border: 1px solid #fecaca;">
+                        <div style="font-size: 2rem; margin-bottom: 1rem;">⚠️</div>
+                        <h4 style="margin-bottom: 0.5rem;">Error Loading Reports</h4>
+                        <p>Unable to load quarterly reports. Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Load K1 tax documents
+        async function loadK1Documents() {
+            try {
+                const response = await fetch('/api/investor/k1-documents', {
+                    credentials: 'include'
+                });
+                
+                if (response.status === 401) {
+                    // Not authenticated - redirect to login
+                    logout();
+                    showError('Session expired. Please log in again.');
+                    return;
+                }
+                
+                if (!response.ok) {
+                    throw new Error('Failed to load K1 documents');
+                }
+                
+                const documents = await response.json();
+                const container = document.getElementById('k1DocumentsContainer');
+                
+                if (documents.length === 0) {
+                    container.innerHTML = `
+                        <div style="text-align: center; padding: 2rem; color: #64748b; background: #f8fafc; border-radius: 8px; border: 1px dashed #cbd5e1;">
+                            <div style="font-size: 2rem; margin-bottom: 1rem;">📄</div>
+                            <h4 style="margin-bottom: 0.5rem;">No K1 Documents Available</h4>
+                            <p>K1 tax documents will appear here when they are available for download.</p>
+                        </div>
+                    `;
+                } else {
+                    container.innerHTML = documents.map(doc => `
+                        <div style="border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; background: white;">
+                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                                <div>
+                                    <h5 style="margin: 0 0 0.5rem 0; color: hsl(219, 79%, 24%); font-weight: 600;">
+                                        ${doc.fileName || 'K1 Tax Document'}
+                                    </h5>
+                                    <p style="margin: 0; color: #64748b; font-size: 0.9rem;">
+                                        Tax Year: ${doc.taxYear}
+                                    </p>
+                                    <p style="margin: 0.25rem 0 0 0; color: #64748b; font-size: 0.8rem;">Property ${doc.propertyId}</p>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="background: #f0f9ff; color: #0369a1; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem; font-weight: 500;">
+                                        Available
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="display: flex; gap: 1rem; align-items: center;">
+                                <a href="${doc.filePath}" target="_blank" 
+                                   style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: hsl(219, 79%, 24%); color: white; text-decoration: none; border-radius: 6px; font-size: 0.9rem; transition: background 0.3s;">
+                                    📄 Download K1
+                                </a>
+                                <span style="color: #64748b; font-size: 0.8rem;">
+                                    ${doc.fileName || 'Tax Document'}
+                                </span>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            } catch (error) {
+                console.error('Error loading K1 documents:', error);
+                document.getElementById('k1DocumentsContainer').innerHTML = `
+                    <div style="text-align: center; padding: 2rem; color: #dc2626; background: #fee2e2; border-radius: 8px; border: 1px solid #fecaca;">
+                        <div style="font-size: 2rem; margin-bottom: 1rem;">⚠️</div>
+                        <h4 style="margin-bottom: 0.5rem;">Error Loading Documents</h4>
+                        <p>Unable to load K1 tax documents. Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Login functionality
+        async function handleLogin(event) {
+            event.preventDefault();
+            const email = event.target.email.value;
+            const password = event.target.password.value;
+            
+            if (!email || !password) {
+                showError('Please enter both email and password');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/investor/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Store user info
+                    localStorage.setItem('investorUser', JSON.stringify(data));
+                    localStorage.setItem('isLoggedIn', 'true');
+                    
+                    // Show dashboard
+                    document.getElementById('loginContainer').style.display = 'none';
+                    document.getElementById('dashboard').style.display = 'block';
+                    
+                    // Update user name
+                    document.getElementById('userName').textContent = `Welcome, ${data.firstName} ${data.lastName}`;
+                    
+                    // Load user data
+                    loadUserData();
+                } else {
+                    showError(data.error || 'Login failed');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showError('Login failed. Please try again.');
+            }
+        }
+        
+        // Password Reset Functions
+        function showForgotPassword() {
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('resetContainer').style.display = 'flex';
+        }
+        
+        function showLogin() {
+            document.getElementById('resetContainer').style.display = 'none';
+            document.getElementById('newPasswordContainer').style.display = 'none';
+            document.getElementById('registrationContainer').style.display = 'none';
+            document.getElementById('loginContainer').style.display = 'flex';
+        }
+        
+        function showRegistration() {
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('registrationContainer').style.display = 'flex';
+        }
+        
+        async function handleRegistration(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = {
+                firstName: formData.get('firstName'),
+                lastName: formData.get('lastName'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                password: formData.get('password'),
+                confirmPassword: formData.get('confirmPassword'),
+                investmentAmount: formData.get('investmentAmount'),
+                accreditationStatus: formData.get('accreditationStatus')
+            };
+            
+            // Validate passwords match
+            if (data.password !== data.confirmPassword) {
+                showRegistrationError('Passwords do not match');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/investor/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    showRegistrationSuccess('Account created successfully! Please wait for approval from MB Capital Group. You will receive an email notification when your account is approved.');
+                    event.target.reset();
+                    // Redirect to login after 3 seconds
+                    setTimeout(() => {
+                        showLogin();
+                    }, 3000);
+                } else {
+                    showRegistrationError(result.error || 'Failed to create account');
+                }
+            } catch (error) {
+                console.error('Registration error:', error);
+                showRegistrationError('Failed to create account. Please try again.');
+            }
+        }
+        
+        function showRegistrationSuccess(message) {
+            const successEl = document.getElementById('registrationMessage');
+            const errorEl = document.getElementById('registrationError');
+            
+            successEl.textContent = message;
+            successEl.style.display = 'block';
+            errorEl.style.display = 'none';
+        }
+        
+        function showRegistrationError(message) {
+            const errorEl = document.getElementById('registrationError');
+            const successEl = document.getElementById('registrationMessage');
+            
+            errorEl.textContent = message;
+            errorEl.style.display = 'block';
+            successEl.style.display = 'none';
+        }
+        
+        function togglePasswordVisibility(inputId, toggleId) {
+            const passwordInput = document.getElementById(inputId);
+            const toggleButton = document.getElementById(toggleId);
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleButton.textContent = '🙈';
+                toggleButton.title = 'Hide password';
+            } else {
+                passwordInput.type = 'password';
+                toggleButton.textContent = '👁️';
+                toggleButton.title = 'Show password';
+            }
+        }
+        
+        function selectResetOption(option) {
+            // Update option buttons
+            document.querySelectorAll('.reset-option').forEach(opt => {
+                opt.classList.remove('active');
+            });
+            event.target.closest('.reset-option').classList.add('active');
+            
+            // Show appropriate form
+            if (option === 'password') {
+                document.getElementById('passwordResetForm').style.display = 'block';
+                document.getElementById('usernameRecoveryForm').style.display = 'none';
+            } else {
+                document.getElementById('passwordResetForm').style.display = 'none';
+                document.getElementById('usernameRecoveryForm').style.display = 'block';
+            }
+        }
+        
+        async function handlePasswordReset(event) {
+            event.preventDefault();
+            const email = event.target.email.value;
+            
+            if (!email) {
+                showResetError('resetError', 'Please enter your email address');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/investor/password-reset', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    hideResetError('resetError');
+                    showResetSuccess('resetMessage', data.message);
+                    event.target.reset();
+                } else {
+                    hideResetError('resetMessage');
+                    showResetError('resetError', data.error || 'Failed to send reset email');
+                }
+            } catch (error) {
+                console.error('Password reset error:', error);
+                showResetError('resetError', 'Failed to send reset email. Please try again.');
+            }
+        }
+        
+        async function handleUsernameRecovery(event) {
+            event.preventDefault();
+            const email = event.target.email.value;
+            
+            if (!email) {
+                showResetError('recoveryError', 'Please enter your email address');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/investor/username-recovery', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    hideResetError('recoveryError');
+                    showResetSuccess('recoveryMessage', data.message);
+                    event.target.reset();
+                } else {
+                    hideResetError('recoveryMessage');
+                    showResetError('recoveryError', data.error || 'Failed to send username reminder');
+                }
+            } catch (error) {
+                console.error('Username recovery error:', error);
+                showResetError('recoveryError', 'Failed to send username reminder. Please try again.');
+            }
+        }
+        
+        async function handleNewPassword(event) {
+            event.preventDefault();
+            const newPassword = event.target.password.value;
+            const confirmPassword = event.target.confirmPassword.value;
+            
+            if (newPassword !== confirmPassword) {
+                showResetError('newPasswordError', 'Passwords do not match');
+                return;
+            }
+            
+            if (newPassword.length < 8) {
+                showResetError('newPasswordError', 'Password must be at least 8 characters long');
+                return;
+            }
+            
+            const token = localStorage.getItem('resetToken');
+            if (!token) {
+                showResetError('newPasswordError', 'Invalid reset token. Please request a new password reset.');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/investor/password-reset/complete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ token, newPassword })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    hideResetError('newPasswordError');
+                    showResetSuccess('newPasswordMessage', data.message);
+                    localStorage.removeItem('resetToken');
+                    
+                    // Redirect to login after 3 seconds
+                    setTimeout(() => {
+                        showLogin();
+                    }, 3000);
+                } else {
+                    hideResetError('newPasswordMessage');
+                    showResetError('newPasswordError', data.error || 'Failed to reset password');
+                }
+            } catch (error) {
+                console.error('Password reset error:', error);
+                showResetError('newPasswordError', 'Failed to reset password. Please try again.');
+            }
+        }
+        
+        function showResetError(elementId, message) {
+            const errorEl = document.getElementById(elementId);
+            errorEl.textContent = message;
+            errorEl.style.display = 'block';
+            errorEl.style.color = '#ef4444';
+            errorEl.style.background = '#fee2e2';
+        }
+        
+        function hideResetError(elementId) {
+            const errorEl = document.getElementById(elementId);
+            errorEl.style.display = 'none';
+        }
+        
+        function showResetSuccess(elementId, message) {
+            const successEl = document.getElementById(elementId);
+            successEl.textContent = message;
+            successEl.style.display = 'block';
+        }
+
+        // Logout functionality
+        function logout() {
+            localStorage.removeItem('investorUser');
+            localStorage.removeItem('isLoggedIn');
+            
+            document.getElementById('dashboard').style.display = 'none';
+            document.getElementById('loginContainer').style.display = 'flex';
+            
+            // Clear form
+            document.getElementById('email').value = '';
+            document.getElementById('password').value = '';
+        }
+        
+        // Error handling
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Load user data
+        async function loadUserData() {
+            try {
+                const response = await fetch('/api/investor/portfolio', {
+                    credentials: 'include'
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    updateDashboard(data);
+                } else {
+                    console.error('Failed to load portfolio data');
+                    // Show error message in dashboard
+                    updateDashboard({
+                        stats: {
+                            totalInvestment: 0,
+                            activeProperties: 0,
+                            annualReturn: 0,
+                            quarterlyDistribution: 0
+                        },
+                        investments: []
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading portfolio data:', error);
+                // Show error message in dashboard
+                updateDashboard({
+                    stats: {
+                        totalInvestment: 0,
+                        activeProperties: 0,
+                        annualReturn: 0,
+                        quarterlyDistribution: 0
+                    },
+                    investments: []
+                });
+            }
+        }
+
+        function updateDashboard(data) {
+            // Update stats cards
+            const totalInvestmentEl = document.querySelector('.stat-value');
+            if (totalInvestmentEl) {
+                totalInvestmentEl.textContent = '$' + data.stats.totalInvestment.toLocaleString();
+            }
+            
+            // Find and update all stat cards
+            const statCards = document.querySelectorAll('.stat-card');
+            if (statCards.length >= 4) {
+                statCards[0].querySelector('.stat-value').textContent = '$' + data.stats.totalInvestment.toLocaleString();
+                statCards[1].querySelector('.stat-value').textContent = data.stats.annualReturn + '%';
+                statCards[2].querySelector('.stat-value').textContent = data.stats.activeProperties;
+                statCards[3].querySelector('.stat-value').textContent = '$' + data.stats.quarterlyDistribution.toLocaleString();
+            }
+
+            // Update investments section if there are investments
+            if (data.investments && data.investments.length > 0) {
+                const investmentsTab = document.getElementById('investments');
+                if (investmentsTab) {
+                    investmentsTab.innerHTML = `
+                        <div class="investment-grid">
+                            ${data.investments.map(investment => `
+                                <div class="investment-card">
+                                    <div class="investment-header">
+                                        <h3>${investment.propertyName}</h3>
+                                        <span class="investment-status">Active</span>
+                                    </div>
+                                    <div class="investment-details">
+                                        <div class="detail-row">
+                                            <span>Investment Amount:</span>
+                                            <span>$${parseFloat(investment.investmentAmount.toString().replace(/[$,]/g, '')).toLocaleString()}</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span>Equity Percentage:</span>
+                                            <span>${investment.equityPercentage}%</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span>Investment Date:</span>
+                                            <span>${new Date(investment.investmentDate).toLocaleDateString()}</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span>Property Address:</span>
+                                            <span>${investment.propertyAddress}, ${investment.city}, ${investment.state}</span>
+                                        </div>
+                                        ${investment.totalUnits ? `
+                                        <div class="detail-row">
+                                            <span>Total Units:</span>
+                                            <span>${investment.totalUnits}</span>
+                                        </div>
+                                        ` : ''}
+                                        ${investment.targetAnnualReturn ? `
+                                        <div class="detail-row">
+                                            <span>Target Annual Return:</span>
+                                            <span>${investment.targetAnnualReturn}</span>
+                                        </div>
+                                        ` : ''}
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                }
+            }
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for reset token in URL or localStorage
+            const resetToken = localStorage.getItem('resetToken');
+            if (resetToken) {
+                // Show new password form
+                document.getElementById('loginContainer').style.display = 'none';
+                document.getElementById('newPasswordContainer').style.display = 'flex';
+                return;
+            }
+            
+            // Check if user is already logged in
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (isLoggedIn === 'true') {
+                const userDataStr = localStorage.getItem('investorUser');
+                if (userDataStr) {
+                    const userData = JSON.parse(userDataStr);
+                    
+                    // Show dashboard
+                    document.getElementById('loginContainer').style.display = 'none';
+                    document.getElementById('dashboard').style.display = 'block';
+                    
+                    // Update user name
+                    document.getElementById('userName').textContent = `Welcome, ${userData.firstName} ${userData.lastName}`;
+                    
+                    // Load user data
+                    loadUserData();
+                }
+            }
+        });
+    </script>
+</body>
+
+        </div>
+        <div id="taxcalc" class="tab-content">
+            
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate Tax Calculator - Calculate Tax Benefits & Savings | MB Capital Group</title>
+    <meta name="description" content="Free real estate tax calculator. Calculate tax benefits from multifamily property investments including depreciation, cost segregation, and tax savings. Used by 1000+ investors.">
+    <meta name="keywords" content="tax calculator, real estate tax calculator, tax benefits calculator, depreciation calculator, cost segregation calculator, investment tax savings, multifamily tax benefits">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mbcapitalgroup.com/tax-calculator.html">
+    
+    <!-- Open Graph for Social Sharing -->
+    <meta property="og:title" content="Real Estate Tax Calculator - Calculate Investment Tax Benefits">
+    <meta property="og:description" content="Calculate tax benefits from real estate investments including depreciation and cost segregation savings. Free calculator tool for property investors.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mbcapitalgroup.com/tax-calculator.html">
+    <meta property="og:image" content="https://mbcapitalgroup.com/uploads/tax-calculator-preview.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Real Estate Tax Calculator - Calculate Investment Tax Benefits">
+    <meta name="twitter:description" content="Calculate tax benefits from real estate investments including depreciation and cost segregation savings.">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Real Estate Tax Benefits Calculator",
+      "description": "Calculate tax benefits from multifamily property investments including depreciation, cost segregation, and tax savings",
+      "url": "https://mbcapitalgroup.com/tax-calculator.html",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "provider": {
+        "@type": "Organization",
+        "name": "MB Capital Group",
+        "url": "https://mbcapitalgroup.com"
+      }
+    }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, hsl(219, 79%, 24%) 0%, hsl(219, 79%, 35%) 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, hsl(219, 79%, 24%) 0%, hsl(219, 79%, 35%) 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .home-button {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .home-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .seo-content {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .seo-content h2 {
+            color: hsl(219, 79%, 24%);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .seo-content h3 {
+            color: hsl(219, 79%, 24%);
+            margin-bottom: 0.75rem;
+            margin-top: 1.5rem;
+            font-size: 1.25rem;
+        }
+
+        .seo-content p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #495057;
+        }
+
+        .seo-content ul {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        .seo-content li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+            color: #495057;
+        }
+
+        .disclaimer {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 2rem 0;
+        }
+
+        .disclaimer h4 {
+            color: #856404;
+            margin-bottom: 0.5rem;
+        }
+
+        .disclaimer p {
+            color: #856404;
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, hsl(219, 79%, 24%) 0%, hsl(219, 79%, 35%) 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .cta-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .cta-section p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: hsl(43, 96%, 49%);
+            color: hsl(219, 79%, 24%);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: hsl(43, 96%, 55%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .calculator {
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: hsl(219, 79%, 24%);
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: hsl(219, 79%, 24%);
+        }
+
+        .btn {
+            background: hsl(43, 96%, 49%);
+            color: hsl(219, 79%, 24%);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: hsl(43, 96%, 42%);
+            transform: translateY(-2px);
+        }
+
+        .results {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: hsl(210, 40%, 98%);
+            border-radius: 8px;
+            border-left: 4px solid hsl(43, 96%, 49%);
+        }
+
+        .results h3 {
+            color: hsl(219, 79%, 24%);
+            margin-bottom: 1rem;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: hsl(219, 79%, 24%);
+        }
+
+        .savings {
+            color: hsl(120, 50%, 40%);
+            font-weight: 600;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            background: hsl(43, 96%, 49%);
+            color: hsl(219, 79%, 24%);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: hsl(43, 96%, 42%);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="/" class="home-button">← Home</a>
+            <h1>Tax Benefits Calculator</h1>
+            <p>Calculate potential tax savings from multifamily real estate investments</p>
+        </div>
+
+        <div class="calculator">
+            <div class="form-group">
+                <label for="investment-amount">Investment Amount</label>
+                <select id="investment-amount">
+                    <option value="">Select investment amount...</option>
+                    <option value="75000">$50,000 - $100,000</option>
+                    <option value="175000">$100,000 - $250,000</option>
+                    <option value="375000">$250,000 - $500,000</option>
+                    <option value="625000">$500,000 - $750,000</option>
+                    <option value="1000000">$1,000,000+</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="filing-status">Filing Status</label>
+                <select id="filing-status" onchange="updateTaxBrackets()">
+                    <option value="">Select filing status</option>
+                    <option value="single">Single</option>
+                    <option value="married">Married Filing Jointly</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="tax-bracket">Your Tax Bracket</label>
+                <select id="tax-bracket">
+                    <option value="">Select filing status first</option>
+                </select>
+            </div>
+
+            <button class="btn" onclick="calculateTaxBenefits()">Calculate Tax Benefits</button>
+
+            <div id="results" class="results" style="display: none;">
+                <h3>Estimated Tax Benefits</h3>
+                <div class="result-item">
+                    <span>Current Tax Bracket:</span>
+                    <span id="tax-bracket-result"></span>
+                </div>
+                <div class="result-item">
+                    <span>Standard Annual Depreciation:</span>
+                    <span id="depreciation" class="savings"></span>
+                </div>
+                <div class="result-item">
+                    <span>Cost Segregation Bonus Depreciation:</span>
+                    <span id="cost-segregation" class="savings"></span>
+                </div>
+                <div class="result-item">
+                    <span>Cost Segregation Tax Savings:</span>
+                    <span id="cost-segregation-savings" class="savings"></span>
+                </div>
+                <div class="result-item">
+                    <span>Total First-Year Tax Savings:</span>
+                    <span id="tax-savings" class="savings"></span>
+                </div>
+                <div class="result-item">
+                    <span><strong>Total First-Year Benefits:</strong></span>
+                    <span id="total-benefits" class="savings" style="font-weight: bold; font-size: 1.1em;"></span>
+                </div>
+                
+                <div style="margin-top: 20px; padding: 15px; background-color: #f8f9fa; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                    <h4 style="color: #1e3a8a; margin-bottom: 10px;">Cost Segregation Benefits</h4>
+                    <p style="font-size: 14px; color: #666; margin-bottom: 8px;">
+                        Cost segregation studies identify property components that can be depreciated over 5, 7, or 15 years instead of the standard 27.5 years for residential properties.
+                    </p>
+                    <p style="font-size: 14px; color: #666;">
+                        <strong>Typical benefits include:</strong> Flooring, fixtures, landscaping, parking lots, and specialized building components can often be accelerated.
+                    </p>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <a href="/tools.html" class="back-link">← Back to Tools</a>
+            </div>
+        </div>
+
+        <!-- Educational Content for SEO -->
+        <div class="seo-content">
+            <h2>Understanding Real Estate Tax Benefits & Depreciation</h2>
+            
+            <p>Real estate investments offer some of the most powerful tax advantages available to investors. This calculator helps you estimate potential tax savings from multifamily property investments, including standard depreciation and advanced cost segregation strategies.</p>
+
+            <h3>How Real Estate Depreciation Works</h3>
+            <p>The IRS allows property owners to deduct the cost of income-producing real estate over time through depreciation. For residential rental properties, the standard depreciation period is 27.5 years, meaning you can deduct approximately 3.64% of the property's value each year.</p>
+
+            <h3>Cost Segregation Benefits</h3>
+            <p>Cost segregation is an advanced tax strategy that can significantly accelerate your depreciation deductions. Through engineering-based studies, certain property components can be reclassified for faster depreciation:</p>
+            <ul>
+                <li><strong>5-year property:</strong> Appliances, carpeting, decorative lighting</li>
+                <li><strong>7-year property:</strong> Furniture and fixtures</li>
+                <li><strong>15-year property:</strong> Landscaping, parking lots, exterior lighting</li>
+                <li><strong>27.5-year property:</strong> Building structure (standard)</li>
+            </ul>
+
+            <h3>Investment Amount Considerations</h3>
+            <p>The tax benefits scale with your investment amount and tax bracket. Higher-income investors in top tax brackets see the most dramatic savings. This calculator uses the following investment tiers common in multifamily syndications:</p>
+            <ul>
+                <li><strong>$50k-$100k:</strong> Entry-level syndication investments</li>
+                <li><strong>$100k-$250k:</strong> Standard accredited investor participation</li>
+                <li><strong>$250k-$500k:</strong> Significant portfolio allocation</li>
+                <li><strong>$500k-$750k:</strong> High-net-worth investor level</li>
+                <li><strong>$1M+:</strong> Ultra-high-net-worth and institutional level</li>
+            </ul>
+
+            <h3>Why Choose Multifamily Real Estate?</h3>
+            <p>Multifamily properties offer unique advantages:</p>
+            <ul>
+                <li>Multiple income streams from various units</li>
+                <li>Professional management reduces hands-on involvement</li>
+                <li>Economies of scale in operations and maintenance</li>
+                <li>Strong demand fundamentals in growing markets</li>
+                <li>Inflation hedge through rent increases</li>
+            </ul>
+
+            <div class="disclaimer">
+                <h4>Important Disclaimer</h4>
+                <p>This calculator provides estimates for educational purposes only and should not be considered tax advice. Tax benefits depend on individual circumstances, property characteristics, and current tax laws. Always consult with a qualified tax professional or CPA before making investment decisions. Past performance does not guarantee future results.</p>
+            </div>
+        </div>
+
+        <!-- Call-to-Action Section -->
+        <div class="cta-section">
+            <h3>Ready to Explore Real Estate Investment Opportunities?</h3>
+            <p>MB Capital Group specializes in multifamily real estate syndications that maximize tax benefits while generating strong returns. Learn how our proven investment process can help you build wealth through real estate.</p>
+            <a href="/#investor-form" class="cta-button">Get Investment Information</a>
+        </div>
+    </div>
+
+    <script>
+        async function updateTaxBrackets() {
+            console.log('updateTaxBrackets called');
+            const filingStatus = document.getElementById('filing-status').value;
+            console.log('Filing status:', filingStatus);
+            const taxBracketSelect = document.getElementById('tax-bracket');
+            
+            // Clear existing options
+            taxBracketSelect.innerHTML = '';
+            
+            if (!filingStatus) {
+                taxBracketSelect.innerHTML = '<option value="">Select filing status first</option>';
+                return;
+            }
+            
+            try {
+                // Fetch tax brackets from database
+                const currentYear = new Date().getFullYear();
+                const response = await fetch(`/api/tax-brackets/${currentYear}`);
+                
+                if (!response.ok) {
+                    throw new Error('Failed to fetch tax brackets');
+                }
+                
+                const allBrackets = await response.json();
+                
+                // Filter brackets by filing status
+                const brackets = allBrackets.filter(bracket => bracket.filingStatus === filingStatus);
+                
+                if (brackets.length === 0) {
+                    taxBracketSelect.innerHTML = '<option value="">No tax brackets available for this filing status</option>';
+                    return;
+                }
+                
+                // Add default option
+                taxBracketSelect.innerHTML = '<option value="">Select your tax bracket...</option>';
+                
+                // Add bracket options
+                brackets.forEach(bracket => {
+                    const option = document.createElement('option');
+                    option.value = bracket.rate;
+                    option.textContent = bracket.label;
+                    taxBracketSelect.appendChild(option);
+                });
+                
+            } catch (error) {
+                console.error('Error fetching tax brackets:', error);
+                // Fallback to default message
+                taxBracketSelect.innerHTML = '<option value="">Error loading tax brackets</option>';
+            }
+        }
+
+        function calculateTaxBenefits() {
+            const investmentAmount = parseFloat(document.getElementById('investment-amount').value);
+            const filingStatus = document.getElementById('filing-status').value;
+            const taxRate = parseFloat(document.getElementById('tax-bracket').value);
+
+            if (!investmentAmount || !filingStatus || !taxRate) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Calculate standard depreciation (27.5 years)
+            const depreciationRate = 0.0364; // 27.5 years for residential real estate
+            const annualDepreciation = investmentAmount * depreciationRate;
+            const standardTaxSavings = annualDepreciation * taxRate;
+
+            // Calculate cost segregation benefits
+            // Typically 20-30% of property value can be accelerated to 5-15 year schedules
+            const costSegregationPercentage = 0.25; // 25% of property value
+            const acceleratedAmount = investmentAmount * costSegregationPercentage;
+            
+            // Accelerated depreciation rates (5-year and 15-year property)
+            const fiveYearRate = 0.20; // 20% first year for 5-year property
+            const fifteenYearRate = 0.05; // 5% first year for 15-year property
+            
+            // Split accelerated amount between 5-year (40%) and 15-year (60%) schedules
+            const fiveYearAmount = acceleratedAmount * 0.4;
+            const fifteenYearAmount = acceleratedAmount * 0.6;
+            
+            const fiveYearDepreciation = fiveYearAmount * fiveYearRate;
+            const fifteenYearDepreciation = fifteenYearAmount * fifteenYearRate;
+            const totalAcceleratedDepreciation = fiveYearDepreciation + fifteenYearDepreciation;
+            
+            const costSegregationTaxSavings = totalAcceleratedDepreciation * taxRate;
+
+            // Total benefits
+            const totalFirstYearDepreciation = annualDepreciation + totalAcceleratedDepreciation;
+            const totalTaxSavings = standardTaxSavings + costSegregationTaxSavings;
+
+            // Display results
+            document.getElementById('tax-bracket-result').textContent = (taxRate * 100) + '%';
+            document.getElementById('depreciation').textContent = '$' + annualDepreciation.toLocaleString();
+            document.getElementById('cost-segregation').textContent = '$' + totalAcceleratedDepreciation.toLocaleString();
+            document.getElementById('cost-segregation-savings').textContent = '$' + costSegregationTaxSavings.toLocaleString();
+            document.getElementById('tax-savings').textContent = '$' + totalTaxSavings.toLocaleString();
+            document.getElementById('total-benefits').textContent = '$' + totalTaxSavings.toLocaleString();
+            
+            document.getElementById('results').style.display = 'block';
+        }
+
+        // Track calculator usage for SEO analytics
+        function trackCalculatorUsage() {
+            // Track that someone used the calculator
+            const engagementData = {
+                action: 'calculator_usage',
+                category: 'tax_calculator',
+                label: 'tax_benefits_calculation',
+                value: 1,
+                investmentAmount: document.getElementById('investment-amount').value,
+                filingStatus: document.getElementById('filing-status').value,
+                taxBracket: document.getElementById('tax-bracket').value
+            };
+
+            // Send to analytics
+            fetch('/api/engagement/track', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(engagementData)
+            }).catch(error => {
+                console.log('Analytics tracking failed:', error);
+            });
+        }
+
+        // Track page view for tax calculator
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/api/engagement/track', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    action: 'page_view',
+                    category: 'tax_calculator',
+                    label: 'tax_calculator_page',
+                    value: 1
+                })
+            }).catch(error => {
+                console.log('Page view tracking failed:', error);
+            });
+        });
+
+        // Enhanced calculateTaxBenefits with tracking
+        const originalCalculate = calculateTaxBenefits;
+        calculateTaxBenefits = function() {
+            const result = originalCalculate();
+            trackCalculatorUsage();
+            return result;
+        };
+    </script>
+</body>
+
+        </div>
+        <div id="ai" class="tab-content">
+            
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Investment Recommendations - Free Multifamily Real Estate Analysis | MB Capital Group</title>
+    <meta name="description" content="Get free AI-powered multifamily real estate investment recommendations. Personalized analysis of your investor profile, risk tolerance, and market opportunities. Used by 500+ accredited investors." />
+    <meta name="keywords" content="AI investment recommendations, real estate AI, multifamily investment analysis, personalized investment advice, real estate recommendation engine, investment portfolio analysis" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mbcapitalgroup.com/ai-recommendations.html" />
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Free AI Investment Recommendations - Multifamily Real Estate Analysis" />
+    <meta property="og:description" content="Get personalized multifamily real estate investment recommendations powered by AI analysis of your profile and market conditions." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mbcapitalgroup.com/ai-recommendations.html" />
+    <meta property="og:image" content="https://mbcapitalgroup.com/attached_assets/AI image_1752361521607.jpg" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Free AI Investment Recommendations" />
+    <meta name="twitter:description" content="AI-powered multifamily real estate investment analysis and recommendations." />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "AI Investment Recommendation Engine",
+      "description": "AI-powered tool for personalized multifamily real estate investment recommendations",
+      "url": "https://mbcapitalgroup.com/ai-recommendations.html",
+      "applicationCategory": "FinanceApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "provider": {
+        "@type": "Organization",
+        "name": "MB Capital Group"
+      }
+    }
+    </script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; background: #f8fafc; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        header { background: hsl(219, 79%, 24%); color: white; padding: 1rem 0; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; }
+        .logo-text { font-size: 1.25rem; font-weight: bold; }
+        .nav-link { color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px; transition: background-color 0.3s; }
+        .nav-link:hover { background-color: rgba(255,255,255,0.1); }
+        
+        .main-content { padding: 2rem 0; min-height: calc(100vh - 120px); }
+        .page-title { text-align: center; font-size: 2.5rem; margin-bottom: 1rem; color: hsl(219, 79%, 24%); }
+        .page-subtitle { text-align: center; color: #64748b; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+        
+        .recommendation-wizard { background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 2rem; }
+        .wizard-header { background: hsl(219, 79%, 24%); color: white; padding: 2rem; border-radius: 12px 12px 0 0; text-align: center; }
+        .wizard-header h2 { margin-bottom: 0.5rem; }
+        .wizard-content { padding: 2rem; }
+        
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: hsl(219, 79%, 24%); }
+        .form-group input, .form-group select, .form-group textarea { 
+            width: 100%; 
+            padding: 12px; 
+            border: 2px solid #e2e8f0; 
+            border-radius: 8px; 
+            font-size: 1rem; 
+            transition: border-color 0.3s; 
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { 
+            outline: none; 
+            border-color: hsl(219, 79%, 24%); 
+        }
+        
+        .checkbox-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 0.5rem; }
+        .checkbox-item { display: flex; align-items: center; gap: 0.5rem; }
+        .checkbox-item input[type="checkbox"] { margin: 0; width: auto; }
+        
+        .ai-button { 
+            background: linear-gradient(135deg, hsl(43, 96%, 49%) 0%, hsl(43, 96%, 42%) 100%); 
+            color: white; 
+            border: none; 
+            padding: 1rem 2rem; 
+            border-radius: 8px; 
+            font-weight: 600; 
+            font-size: 1.1rem; 
+            cursor: pointer; 
+            transition: all 0.3s; 
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+            margin: 2rem auto; 
+        }
+        .ai-button:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        .ai-button:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        
+        .loading { text-align: center; padding: 2rem; color: #64748b; }
+        .loading::after { content: ''; display: inline-block; width: 20px; height: 20px; border: 3px solid #f3f3f3; border-top: 3px solid hsl(43, 96%, 49%); border-radius: 50%; animation: spin 1s linear infinite; margin-left: 10px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .recommendations-container { background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); padding: 2rem; margin-bottom: 2rem; display: none; }
+        .recommendations-container.visible { display: block; animation: fadeInUp 0.5s ease-out; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .recommendation-header { display: flex; justify-content: between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 2px solid #f1f5f9; }
+        .match-score { background: hsl(43, 96%, 49%); color: white; padding: 0.5rem 1rem; border-radius: 8px; font-weight: bold; }
+        
+        .primary-recommendation { background: hsl(210, 40%, 98%); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid hsl(43, 96%, 49%); }
+        .recommendation-title { color: hsl(219, 79%, 24%); font-size: 1.4rem; margin-bottom: 1rem; }
+        .market-name { color: hsl(43, 96%, 49%); font-weight: bold; font-size: 1.2rem; }
+        .deal-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0; }
+        .detail-item { text-align: center; padding: 1rem; background: white; border-radius: 8px; }
+        .detail-label { font-size: 0.9rem; color: #64748b; margin-bottom: 0.5rem; }
+        .detail-value { font-weight: bold; color: hsl(219, 79%, 24%); }
+        
+        .reasoning-list { list-style: none; padding: 0; margin: 1rem 0; }
+        .reasoning-list li { padding: 0.5rem 0; padding-left: 2rem; position: relative; }
+        .reasoning-list li::before { content: '✓'; position: absolute; left: 0; color: hsl(43, 96%, 49%); font-weight: bold; }
+        
+        .alternative-options { margin: 2rem 0; }
+        .alternative-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
+        .alternative-card { background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.5rem; }
+        
+        .risk-assessment, .portfolio-fit { background: white; border-radius: 8px; padding: 1.5rem; margin: 1rem 0; }
+        .risk-assessment { border-left: 4px solid #dc2626; }
+        .portfolio-fit { border-left: 4px solid #10b981; }
+        
+        .next-steps { background: hsl(219, 79%, 24%); color: white; border-radius: 8px; padding: 1.5rem; margin: 2rem 0; }
+        .next-steps h3 { margin-bottom: 1rem; }
+        .steps-list { list-style: none; padding: 0; }
+        .steps-list li { padding: 0.5rem 0; padding-left: 2rem; position: relative; }
+        .steps-list li::before { content: '→'; position: absolute; left: 0; color: hsl(43, 96%, 49%); font-weight: bold; }
+        
+        .ai-insights { background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border-radius: 8px; padding: 1.5rem; margin: 2rem 0; border: 1px solid #bae6fd; }
+        .ai-insights h3 { color: hsl(219, 79%, 24%); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .ai-insights h3::before { content: '🤖'; }
+        
+        .error { background: #fef2f2; color: #dc2626; padding: 1rem; border-radius: 8px; margin: 1rem 0; border: 1px solid #fecaca; }
+        
+        @media (max-width: 768px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .deal-details { grid-template-columns: 1fr; }
+            .alternative-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-text">MB Capital Group</div>
+                </div>
+                <a href="/" class="nav-link">← Back to Main Site</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <h1 class="page-title">AI Investment Recommendations</h1>
+            <p class="page-subtitle">
+                Get personalized multifamily real estate investment recommendations based on your profile, goals, and current market conditions using advanced AI analysis.
+            </p>
+
+            <div class="recommendation-wizard">
+                <div class="wizard-header">
+                    <h2>Investment Profile Analysis</h2>
+                    <p>Tell us about your investment goals and we'll provide tailored recommendations</p>
+                </div>
+                
+                <div class="wizard-content">
+                    <form id="recommendationForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required 
+                                       placeholder="your.email@example.com">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="investmentAmount">Investment Amount *</label>
+                                <select id="investmentAmount" name="investmentAmount" required>
+                                    <option value="">Select amount</option>
+                                    <option value="50k-100k">$50,000 - $100,000</option>
+                                    <option value="100k-500k">$100,000 - $500,000</option>
+                                    <option value="500k-1m">$500,000 - $1,000,000</option>
+                                    <option value="1m-plus">$1,000,000+</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="riskTolerance">Risk Tolerance *</label>
+                                <select id="riskTolerance" name="riskTolerance" required>
+                                    <option value="">Select risk level</option>
+                                    <option value="conservative">Conservative - Steady returns, lower risk</option>
+                                    <option value="moderate">Moderate - Balanced risk/reward</option>
+                                    <option value="aggressive">Aggressive - Higher potential returns</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="timeHorizon">Investment Time Horizon</label>
+                                <select id="timeHorizon" name="timeHorizon">
+                                    <option value="1-3 years">1-3 years</option>
+                                    <option value="3-5 years" selected>3-5 years</option>
+                                    <option value="5-10 years">5-10 years</option>
+                                    <option value="10+ years">10+ years</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="experienceLevel">Experience Level</label>
+                                <select id="experienceLevel" name="experienceLevel">
+                                    <option value="beginner">Beginner - New to real estate investing</option>
+                                    <option value="intermediate" selected>Intermediate - Some experience</option>
+                                    <option value="experienced">Experienced - Seasoned investor</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="accreditationStatus">Accreditation Status</label>
+                                <select id="accreditationStatus" name="accreditationStatus">
+                                    <option value="accredited" selected>Accredited Investor</option>
+                                    <option value="sophisticated">Sophisticated Investor</option>
+                                    <option value="unsure">Not Sure</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Investment Goals * (Select all that apply)</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="passive-income" name="investmentGoals" value="passive-income">
+                                    <label for="passive-income">Passive Income</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="capital-appreciation" name="investmentGoals" value="capital-appreciation">
+                                    <label for="capital-appreciation">Capital Appreciation</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="tax-benefits" name="investmentGoals" value="tax-benefits">
+                                    <label for="tax-benefits">Tax Benefits</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="portfolio-diversification" name="investmentGoals" value="portfolio-diversification">
+                                    <label for="portfolio-diversification">Portfolio Diversification</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="inflation-hedge" name="investmentGoals" value="inflation-hedge">
+                                    <label for="inflation-hedge">Inflation Hedge</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="retirement-planning" name="investmentGoals" value="retirement-planning">
+                                    <label for="retirement-planning">Retirement Planning</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="preferredMarkets">Preferred Markets (Optional)</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="kansas-city" name="preferredMarkets" value="Kansas City, MO">
+                                    <label for="kansas-city">Kansas City, MO</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="st-louis" name="preferredMarkets" value="St. Louis, MO">
+                                    <label for="st-louis">St. Louis, MO</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="columbus" name="preferredMarkets" value="Columbus, OH">
+                                    <label for="columbus">Columbus, OH</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="indianapolis" name="preferredMarkets" value="Indianapolis, IN">
+                                    <label for="indianapolis">Indianapolis, IN</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="currentPortfolio">Current Portfolio (Optional)</label>
+                            <textarea id="currentPortfolio" name="currentPortfolio" rows="3" 
+                                      placeholder="Briefly describe your current investment portfolio..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="taxSituation">Tax Situation (Optional)</label>
+                            <input type="text" id="taxSituation" name="taxSituation" 
+                                   placeholder="e.g., High income, need tax shelters">
+                        </div>
+                        
+                        <button type="submit" class="ai-button" id="generateButton">
+                            🤖 Generate AI Recommendations
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="loadingSection" class="loading" style="display: none;">
+                Analyzing your profile and current market conditions...
+            </div>
+
+            <div id="recommendationsContainer" class="recommendations-container">
+                <!-- AI recommendations will be inserted here -->
+            </div>
+
+            <div id="errorContainer" class="error" style="display: none;">
+                <!-- Error messages will be shown here -->
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('recommendationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const data = {};
+            
+            // Get basic form data
+            for (let [key, value] of formData.entries()) {
+                if (key === 'investmentGoals' || key === 'preferredMarkets') {
+                    if (!data[key]) data[key] = [];
+                    data[key].push(value);
+                } else {
+                    data[key] = value;
+                }
+            }
+            
+            // Validation
+            if (!data.email || !data.investmentAmount || !data.riskTolerance) {
+                showError('Please fill in all required fields.');
+                return;
+            }
+            
+            if (!data.investmentGoals || data.investmentGoals.length === 0) {
+                showError('Please select at least one investment goal.');
+                return;
+            }
+            
+            try {
+                showLoading(true);
+                hideError();
+                
+                const response = await fetch('/api/ai-recommendations', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Failed to generate recommendations');
+                }
+                
+                const recommendations = await response.json();
+                displayRecommendations(recommendations);
+                
+            } catch (error) {
+                console.error('Error generating recommendations:', error);
+                showError('Failed to generate recommendations. Please try again.');
+            } finally {
+                showLoading(false);
+            }
+        });
+        
+        function showLoading(show) {
+            const loadingSection = document.getElementById('loadingSection');
+            const generateButton = document.getElementById('generateButton');
+            
+            if (show) {
+                loadingSection.style.display = 'block';
+                generateButton.disabled = true;
+                generateButton.textContent = 'Generating Recommendations...';
+            } else {
+                loadingSection.style.display = 'none';
+                generateButton.disabled = false;
+                generateButton.innerHTML = '🤖 Generate AI Recommendations';
+            }
+        }
+        
+        function showError(message) {
+            const errorContainer = document.getElementById('errorContainer');
+            errorContainer.textContent = message;
+            errorContainer.style.display = 'block';
+        }
+        
+        function hideError() {
+            const errorContainer = document.getElementById('errorContainer');
+            errorContainer.style.display = 'none';
+        }
+        
+        function displayRecommendations(rec) {
+            const container = document.getElementById('recommendationsContainer');
+            
+            container.innerHTML = `
+                <div class="recommendation-header">
+                    <h2>Your Personalized Investment Recommendations</h2>
+                    <div class="match-score">${rec.matchScore}% Match</div>
+                </div>
+                
+                <div class="primary-recommendation">
+                    <div class="recommendation-title">🎯 Primary Recommendation</div>
+                    <div class="market-name">${rec.primaryRecommendation.marketName}</div>
+                    
+                    <div class="deal-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Deal Type</div>
+                            <div class="detail-value">${rec.primaryRecommendation.dealType}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Target Returns</div>
+                            <div class="detail-value">${rec.primaryRecommendation.targetReturns}</div>
+                        </div>
+                    </div>
+                    
+                    <h4 style="color: hsl(219, 79%, 24%); margin: 1rem 0;">Why This Market?</h4>
+                    <ul class="reasoning-list">
+                        ${rec.primaryRecommendation.reasoning.map(reason => `<li>${reason}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                ${rec.alternativeOptions.length > 0 ? `
+                <div class="alternative-options">
+                    <h3 style="color: hsl(219, 79%, 24%); margin-bottom: 1rem;">Alternative Options</h3>
+                    <div class="alternative-grid">
+                        ${rec.alternativeOptions.map(alt => `
+                            <div class="alternative-card">
+                                <h4 style="color: hsl(219, 79%, 24%); margin-bottom: 0.5rem;">${alt.marketName}</h4>
+                                <p><strong>Type:</strong> ${alt.dealType}</p>
+                                <p><strong>Returns:</strong> ${alt.targetReturns}</p>
+                                <p style="margin-top: 0.5rem; color: #64748b;">${alt.reasoning}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                ` : ''}
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+                    <div class="risk-assessment">
+                        <h3 style="margin-bottom: 1rem;">🛡️ Risk Assessment</h3>
+                        <p><strong>Risk Level:</strong> ${rec.riskAssessment.level}</p>
+                        <h4 style="margin: 1rem 0 0.5rem 0;">Risk Factors:</h4>
+                        <ul style="margin-left: 1.5rem;">
+                            ${rec.riskAssessment.factors.map(factor => `<li>${factor}</li>`).join('')}
+                        </ul>
+                        <h4 style="margin: 1rem 0 0.5rem 0;">Mitigation Strategies:</h4>
+                        <ul style="margin-left: 1.5rem;">
+                            ${rec.riskAssessment.mitigation.map(strategy => `<li>${strategy}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="portfolio-fit">
+                        <h3 style="margin-bottom: 1rem;">📊 Portfolio Fit</h3>
+                        <p><strong>Diversification:</strong> ${rec.portfolioFit.diversificationBenefit}</p>
+                        <p style="margin: 0.5rem 0;"><strong>Allocation:</strong> ${rec.portfolioFit.allocationSuggestion}</p>
+                        <h4 style="margin: 1rem 0 0.5rem 0;">Synergies:</h4>
+                        <ul style="margin-left: 1.5rem;">
+                            ${rec.portfolioFit.synergies.map(synergy => `<li>${synergy}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="next-steps">
+                    <h3>🚀 Your Next Steps</h3>
+                    <ul class="steps-list">
+                        ${rec.nextSteps.map(step => `<li>${step}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="ai-insights">
+                    <h3>AI Strategic Analysis</h3>
+                    <p>${rec.aiInsights}</p>
+                </div>
+                
+                <div style="text-align: center; margin-top: 2rem; padding: 2rem; background: hsl(219, 79%, 24%); color: white; border-radius: 8px;">
+                    <h3 style="margin-bottom: 1rem;">Ready to Explore These Opportunities?</h3>
+                    <p style="margin-bottom: 1.5rem;">Schedule a call with Michael Bachmann to discuss these personalized recommendations</p>
+                    <a href="https://calendly.com/michael-mbcapitalgroup" target="_blank" 
+                       style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; background: hsl(43, 96%, 49%); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: background-color 0.3s;"
+                       onmouseover="this.style.backgroundColor='hsl(43, 96%, 45%)'" 
+                       onmouseout="this.style.backgroundColor='hsl(43, 96%, 49%)'">
+                        📅 Schedule Strategy Call
+                    </a>
+                </div>
+            `;
+            
+            container.classList.add('visible');
+            container.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+        }
     </script>
 </body>
 </html>
