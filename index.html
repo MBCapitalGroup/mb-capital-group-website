@@ -989,6 +989,26 @@ window.blogPosts = [
     "author": "Michael Bachmann",
     "publishedAt": "2024-09-30T00:00:00Z",
     "published": true
+  },
+  {
+    "id": 5,
+    "title": "IRA Investing in Real Estate: Maximizing Retirement Wealth Through Multifamily Syndications",
+    "slug": "ira-multifamily-investment-strategies",
+    "excerpt": "Self-directed IRAs and Roth IRAs can be powerful vehicles for multifamily real estate investing, offering tax advantages and diversification benefits for retirement portfolios.",
+    "content": "Many investors are unaware that their retirement accounts can be used to invest in real estate syndications, missing significant opportunities for tax-advantaged wealth building. Self-directed IRAs and Roth IRAs open the door to multifamily real estate investments while maintaining the tax advantages of retirement accounts...",
+    "author": "Michael Bachmann",
+    "publishedAt": "2024-08-15T00:00:00Z",
+    "published": true
+  },
+  {
+    "id": 6,
+    "title": "Due Diligence Essentials: What Every Multifamily Investor Should Know Before Investing",
+    "slug": "multifamily-due-diligence-guide",
+    "excerpt": "Comprehensive due diligence is crucial for successful multifamily investing. Learn the key financial, legal, and operational factors to evaluate before committing capital to any syndication.",
+    "content": "Before investing in any multifamily syndication, conducting thorough due diligence is essential to protect your capital and ensure strong returns. This comprehensive guide outlines the critical factors every investor should evaluate before committing capital to any multifamily investment opportunity...",
+    "author": "Michael Bachmann",
+    "publishedAt": "2024-07-10T00:00:00Z",
+    "published": true
   }
 ];
 
@@ -1057,7 +1077,7 @@ function loadTeamMembers() {
         const teamHtml = window.teamMembers.map(member => `
             <div class="team-member" style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; cursor: pointer;" onclick="openTeamModal('${member.id}')">
                 <img src="${member.image}" alt="${member.name}" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 1.5rem; display: block;">
-                <h3 style="color: hsl(219, 79%, 24%); margin-bottom: 0.5rem;">${member.name}</h3>
+                <h3 style="color: hsl(219, 79%, 24%); margin-bottom: 0.5rem; font-size: 1.1rem; line-height: 1.3; word-wrap: break-word; min-height: 2.6rem; display: flex; align-items: center; justify-content: center;">${member.name}</h3>
                 <p style="color: hsl(43, 96%, 49%); font-weight: 600; margin-bottom: 1rem;">${member.title}</p>
                 <p style="color: #64748b; line-height: 1.6;">${member.bio.substring(0, 150)}...</p>
             </div>
