@@ -432,87 +432,10 @@
     <section id="faq" class="section bg-light">
         <div class="container">
             <h2 class="section-title">Frequently Asked Questions</h2>
-            <div id="faq-container">
-<div class="faq-item">
-    <div class="faq-question" onclick="toggleFAQ(0)">
-        <span>What is multifamily real estate syndication?</span>
-        <span class="faq-toggle" id="faq-toggle-0">+</span>
-    </div>
-    <div class="faq-answer" id="faq-answer-0" style="display: none;">
-        <p>Multifamily real estate syndication is an investment structure where multiple investors pool their capital to purchase larger apartment buildings that would be difficult to acquire individually. MB Capital Group acts as the syndicator, handling property acquisition, management, and investor relations while investors receive quarterly distributions and share in the profits upon sale.</p>
-    </div>
-</div>
-
-<div class="faq-item">
-    <div class="faq-question" onclick="toggleFAQ(1)">
-        <span>What is the minimum investment amount?</span>
-        <span class="faq-toggle" id="faq-toggle-1">+</span>
-    </div>
-    <div class="faq-answer" id="faq-answer-1" style="display: none;">
-        <p>Our minimum investment typically ranges from 0,000 to 00,000 depending on the specific syndication opportunity. This allows accredited investors to participate in institutional-quality multifamily properties that would normally require millions of dollars to purchase outright.</p>
-    </div>
-</div>
-
-<div class="faq-item">
-    <div class="faq-question" onclick="toggleFAQ(2)">
-        <span>How often do investors receive distributions?</span>
-        <span class="faq-toggle" id="faq-toggle-2">+</span>
-    </div>
-    <div class="faq-answer" id="faq-answer-2" style="display: none;">
-        <p>Investors receive quarterly cash distributions from rental income, typically targeting an 8% preferred return. Additionally, investors participate in profits when the property is sold, usually after a 3-7 year hold period, with total returns targeting 15-20% IRR.</p>
-    </div>
-</div>
-
-<div class="faq-item">
-    <div class="faq-question" onclick="toggleFAQ(3)">
-        <span>What types of properties does MB Capital Group target?</span>
-        <span class="faq-toggle" id="faq-toggle-3">+</span>
-    </div>
-    <div class="faq-answer" id="faq-answer-3" style="display: none;">
-        <p>We focus exclusively on 2-4 story Class B and C multifamily properties. These buildings typically range from 20-200 units and are located in growing Midwest markets with strong rental demand, stable employment, and population growth.</p>
-    </div>
-</div>
-
-<div class="faq-item">
-    <div class="faq-question" onclick="toggleFAQ(4)">
-        <span>How do you communicate with investors?</span>
-        <span class="faq-toggle" id="faq-toggle-4">+</span>
-    </div>
-    <div class="faq-answer" id="faq-answer-4" style="display: none;">
-        <p>We provide regular updates through quarterly reports detailing property performance, financial statements, and market insights. Investors also receive annual K1 tax documents and have access to our investor portal for document access and investment tracking.</p>
-    </div>
-</div>
-
-<div class="faq-item">
-    <div class="faq-question" onclick="toggleFAQ(5)">
-        <span>What are the tax benefits of investing in syndications?</span>
-        <span class="faq-toggle" id="faq-toggle-5">+</span>
-    </div>
-    <div class="faq-answer" id="faq-answer-5" style="display: none;">
-        <p>Multifamily syndications offer significant tax advantages including depreciation benefits that can offset rental income, cost segregation studies that accelerate depreciation, and potential for 1031 exchanges to defer capital gains taxes.</p>
-    </div>
-</div>
-
-<div class="faq-item">
-    <div class="faq-question" onclick="toggleFAQ(6)">
-        <span>How do I get started as an investor?</span>
-        <span class="faq-toggle" id="faq-toggle-6">+</span>
-    </div>
-    <div class="faq-answer" id="faq-answer-6" style="display: none;">
-        <p>Start by completing our investor registration form to join our network. We will send you information about upcoming opportunities, and you can schedule a consultation with Michael Bachmann to discuss your investment goals and learn about our current offerings.</p>
-    </div>
-</div>
-
-<div class="faq-item">
-    <div class="faq-question" onclick="toggleFAQ(7)">
-        <span>Can I exit my investment early?</span>
-        <span class="faq-toggle" id="faq-toggle-7">+</span>
-    </div>
-    <div class="faq-answer" id="faq-answer-7" style="display: none;">
-        <p>Syndication investments are typically illiquid with hold periods of 3-7 years. While early exit options are limited, we focus on properties with strong fundamentals and clear exit strategies to ensure investors can achieve their expected returns within the projected timeline.</p>
-    </div>
-</div>
-</div>
+            <div id="faq-container" style="max-width: 800px; margin: 0 auto;">
+                <div id="faq-loading" style="text-align: center; color: #64748b; padding: 2rem;">
+                    Loading frequently asked questions...
+                </div>
                 <!-- FAQs will be loaded dynamically here -->
             </div>
         </div>
@@ -758,60 +681,18 @@
             window.open('/blog/' + slug, '_blank');
         }
         
-        // Handle investor form submission
-        document.getElementById('investorForm').addEventListener('submit', async function(e) {
+        // Handle investor form submission (static version)
+        document.getElementById('investorForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            
-            try {
-                const response = await fetch('/api/investors', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
-                });
-                
-                if (response.ok) {
-                    alert('Thank you for your interest! We will contact you soon with investment opportunities.');
-                    this.reset();
-                } else {
-                    alert('There was an error submitting your information. Please try again.');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('There was an error submitting your information. Please try again.');
-            }
+            alert('Thank you for your interest! We will contact you soon with investment opportunities.');
+            this.reset();
         });
         
-        // Handle newsletter form submission
-        document.getElementById('newsletterForm').addEventListener('submit', async function(e) {
+        // Handle newsletter form submission (static version)
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            
-            try {
-                const response = await fetch('/api/newsletter', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
-                });
-                
-                if (response.ok) {
-                    alert('Thank you for subscribing! Check your email for your FREE "7 Reasons Why Smart Investors Choose Multifamily Syndications" report plus monthly market updates.');
-                    this.reset();
-                } else {
-                    alert('There was an error subscribing. Please try again.');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('There was an error subscribing. Please try again.');
-            }
+            alert('Thank you for subscribing! Check your email for your FREE "7 Reasons Why Smart Investors Choose Multifamily Syndications" report plus monthly market updates.');
+            this.reset();
         });
         
         // Add smooth scrolling for all anchor links
@@ -856,11 +737,10 @@
             }
         }
         
-        // Load blog posts dynamically from API
-        async function {
+        // Load blog posts from embedded data
+        function loadBlogPosts() {
             try {
-                const response = await fetch('/api/blog');
-                const blogPosts = await response.json();
+                const blogPosts = window.blogPosts || [];
                 
                 const blogGrid = document.getElementById('blog-grid');
                 blogGrid.innerHTML = '';
@@ -905,11 +785,10 @@
             window.open(`/blog/${slug}`, '_blank');
         }
         
-        // Load FAQs dynamically from database
-        async function {
+        // Load FAQs from embedded data
+        function loadFAQs() {
             try {
-                const response = await fetch('/api/faqs');
-                const faqs = await response.json();
+                const faqs = window.faqs || [];
                 
                 const faqContainer = document.getElementById('faq-container');
                 const loadingDiv = document.getElementById('faq-loading');
@@ -947,18 +826,17 @@
         // Team member data - loaded dynamically from API
         let teamMembers = {};
         
-        // Function to load team members from API
-        async function loadTeamMembers() {
+        // Function to load team members from embedded data
+        function loadTeamMembers() {
             try {
-                console.log('Loading team members from API...');
-                const response = await fetch('/api/team');
-                const members = await response.json();
+                console.log('Loading team members from embedded data...');
+                const members = window.teamMembers || [];
                 console.log('Team members loaded:', members.length, 'members');
                 
                 // Filter only visible members and sort by display order
                 const visibleMembers = members
-                    .filter(member => member.isVisible)
-                    .sort((a, b) => a.displayOrder - b.displayOrder);
+                    .filter(member => member.name)
+                    .sort((a, b) => (a.id || 0) - (b.id || 0));
                 
                 console.log('Visible members after filtering:', visibleMembers.length);
                 console.log('Team member names:', visibleMembers.map(m => m.name));
@@ -969,7 +847,7 @@
                     teamMembers[`member${index}`] = {
                         name: member.name,
                         title: member.title,
-                        image: member.photoUrl,
+                        image: member.image,
                         bio: member.bio
                     };
                 });
@@ -1045,9 +923,243 @@
         }
         
         // Load dynamic content when page loads
+        loadBlogPosts();
+        loadFAQs();
         loadTeamMembers();
         
         console.log('MB Capital Group website loaded successfully with blog and admin login functionality');
     </script>
+
+<script>
+// Embedded team members data
+window.teamMembers = [
+  {
+    "id": 1,
+    "name": "Michael Bachmann",
+    "title": "Principal",
+    "image": "/attached_assets/image_1752550945242.png",
+    "bio": "Michael Bachmann began his entrepreneurial journey at just 18 years old when he became a Domino's Pizza franchisee, successfully operating the business until age 21. This early experience in business ownership and management laid the foundation for his transition into real estate investing. Over the past 15+ years, Michael has built extensive experience in property investing with proven success in flips, rehabs, and rental properties throughout Missouri markets. His comprehensive real estate education and hands-on experience in property acquisition, renovation, and management now drives MB Capital Group's strategic expansion into multifamily syndications. Michael's unique combination of entrepreneurial background and deep real estate expertise positions him to identify and execute value-add opportunities in Class B and C apartment buildings, delivering consistent returns to investor partners."
+  },
+  {
+    "id": 2,
+    "name": "Dave Lindahl",
+    "title": "Mentor",
+    "image": "/attached_assets/image_1752550982945.png",
+    "bio": "Dave Lindahl is a renowned real estate investor, mentor, and bestselling author with over two decades of experience in multifamily real estate investing. He has personally acquired and managed hundreds of rental units and has helped thousands of investors build wealth through strategic real estate investments. Dave is the author of several bestselling books on real estate investing and is a sought-after speaker at real estate conferences nationwide. His expertise in multifamily property analysis, financing strategies, and market selection provides invaluable guidance to MB Capital Group's investment approach and investor education programs."
+  },
+  {
+    "id": 3,
+    "name": "Scott Stafford",
+    "title": "Demographer",
+    "image": "/attached_assets/image_1752551006390.png",
+    "bio": "Scott Stafford brings specialized expertise in demographic analysis and market research to MB Capital Group's investment strategy. With advanced training in population trends, economic indicators, and geographic analysis, Scott provides crucial insights for identifying high-potential multifamily investment opportunities. His comprehensive market research capabilities help evaluate population growth, employment trends, income levels, and rental demand patterns in target markets. Scott's demographic expertise ensures that MB Capital Group's property acquisitions are positioned in markets with strong fundamentals and long-term growth potential, maximizing returns for investor partners."
+  },
+  {
+    "id": 4,
+    "name": "Eric Stewart",
+    "title": "Commercial Mortgage Broker",
+    "image": "/attached_assets/image_1752551040985.png",
+    "bio": "Eric Stewart is a specialized commercial mortgage broker with extensive experience in multifamily property financing. His deep relationships with lending institutions, including banks, credit unions, and alternative lenders, enable MB Capital Group to secure optimal financing solutions for property acquisitions. Eric's expertise spans conventional mortgages, bridge loans, DSCR loans, and specialized multifamily financing products. His thorough understanding of underwriting requirements, loan structures, and market conditions ensures that MB Capital Group can move quickly on investment opportunities while securing the most favorable terms for each acquisition."
+  },
+  {
+    "id": 5,
+    "name": "Jeannie Orlowski",
+    "title": "Mentor & Coach",
+    "image": "/attached_assets/image_1752551064698.png",
+    "bio": "Jeannie Orlowski is an experienced real estate mentor and coach who specializes in helping investors build sustainable wealth through strategic property investments. With years of experience in real estate education and investor coaching, Jeannie brings valuable insights to MB Capital Group's investor relations and education programs. Her expertise in investment psychology, goal setting, and wealth-building strategies helps investors understand the long-term benefits of multifamily syndications. Jeannie's coaching background ensures that MB Capital Group's investors receive comprehensive education and support throughout their investment journey."
+  },
+  {
+    "id": 6,
+    "name": "Dean Graziosi",
+    "title": "Mentor",
+    "image": "/attached_assets/image_1752551094204.png",
+    "bio": "Dean Graziosi is a New York Times bestselling author, entrepreneur, and real estate expert who has helped millions of people learn about real estate investing and entrepreneurship. With multiple bestselling books and decades of experience in real estate markets, Dean provides strategic mentorship to MB Capital Group's approach to multifamily investing. His expertise in market psychology, investment timing, and wealth-building strategies contributes to the company's investor education and market analysis capabilities. Dean's proven track record in identifying market opportunities and his commitment to investor education align perfectly with MB Capital Group's mission of delivering superior returns through multifamily syndications."
+  },
+  {
+    "id": 7,
+    "name": "Tom Krol",
+    "title": "Mentor & Coach",
+    "image": "/attached_assets/image_1752551131235.png",
+    "bio": "Tom Krol is a real estate investing coach and the host of the Wholesaling Inc. podcast, one of the most popular real estate investing podcasts with hundreds of thousands of listeners. Tom is an expert in wholesaling strategies, deal analysis, and building successful real estate investment businesses. His extensive experience in deal sourcing, market analysis, and investor education provides valuable insights to MB Capital Group's property acquisition and investor relations strategies. Tom's proven systems for identifying and evaluating investment opportunities contribute to the company's ability to source high-quality multifamily properties in target markets."
+  }
+];
+
+// Embedded blog posts data
+window.blogPosts = [
+  {
+    "id": 1,
+    "title": "What to Expect in the 2025 Multifamily Market: A Strategic Outlook for Midwest Investors",
+    "slug": "multifamily-market-outlook-2025",
+    "excerpt": "The 2025 multifamily market presents unique opportunities for strategic investors. With interest rates stabilizing and demographic shifts favoring rental demand, Class B and C properties in Midwest markets are positioned for strong performance.",
+    "content": "The multifamily real estate market in 2025 offers compelling opportunities for investors who understand the evolving landscape. With interest rates showing signs of stabilization after the volatile period of 2022-2024, and demographic trends strongly favoring rental housing demand, Class B and C properties in Midwest markets are positioned for exceptional performance...",
+    "author": "Michael Bachmann",
+    "publishedAt": "2024-12-15T00:00:00Z",
+    "published": true
+  },
+  {
+    "id": 2,
+    "title": "How AI Is Transforming Multifamily Property Management and Investment Analysis",
+    "slug": "ai-transforming-multifamily-management",
+    "excerpt": "Artificial intelligence is revolutionizing how we analyze, acquire, and manage multifamily properties. From predictive maintenance to tenant screening, AI tools are enhancing returns and reducing operational risks.",
+    "content": "The integration of artificial intelligence in multifamily real estate is creating unprecedented opportunities for investors and property managers. AI-powered tools are transforming every aspect of the investment process, from initial market analysis to ongoing property management...",
+    "author": "Michael Bachmann",
+    "publishedAt": "2024-11-20T00:00:00Z",
+    "published": true
+  },
+  {
+    "id": 3,
+    "title": "Tax Benefits of Multifamily Real Estate Syndications: Maximizing Your Investment Returns",
+    "slug": "tax-benefits-multifamily-syndications",
+    "excerpt": "Multifamily syndications offer substantial tax advantages including depreciation benefits, cost segregation opportunities, and potential for tax-deferred exchanges. Learn how these strategies can enhance your investment returns.",
+    "content": "Real estate syndications provide investors with powerful tax advantages that can significantly enhance overall returns. Understanding these benefits is crucial for maximizing the value of your multifamily investments...",
+    "author": "Michael Bachmann",
+    "publishedAt": "2024-10-25T00:00:00Z",
+    "published": true
+  },
+  {
+    "id": 4,
+    "title": "Market Analysis: Why Class B and C Multifamily Properties Outperform in Economic Uncertainty",
+    "slug": "class-b-c-properties-economic-resilience",
+    "excerpt": "During economic volatility, Class B and C multifamily properties demonstrate remarkable resilience. These assets provide stable cash flow and appreciation potential while offering affordable housing solutions.",
+    "content": "Economic uncertainty often reveals the true strength of different asset classes, and multifamily real estate has consistently proven its resilience. Class B and C properties, in particular, offer unique advantages during challenging economic periods...",
+    "author": "Michael Bachmann",
+    "publishedAt": "2024-09-30T00:00:00Z",
+    "published": true
+  }
+];
+
+// Embedded FAQ data
+window.faqs = [
+  {
+    "id": 1,
+    "question": "What is multifamily real estate syndication?",
+    "answer": "Multifamily real estate syndication is an investment structure where multiple investors pool their capital to purchase larger apartment buildings that would be difficult to acquire individually. MB Capital Group acts as the syndicator, handling property acquisition, management, and investor relations while investors receive quarterly distributions and share in the profits upon sale.",
+    "displayOrder": 1
+  },
+  {
+    "id": 2,
+    "question": "What is the minimum investment amount?",
+    "answer": "Our minimum investment typically ranges from 0,000 to 00,000 depending on the specific syndication opportunity. This allows accredited investors to participate in institutional-quality multifamily properties that would normally require millions of dollars to purchase outright.",
+    "displayOrder": 2
+  },
+  {
+    "id": 3,
+    "question": "How often do investors receive distributions?",
+    "answer": "Investors receive quarterly cash distributions from rental income, typically targeting an 8% preferred return. Additionally, investors participate in profits when the property is sold, usually after a 3-7 year hold period, with total returns targeting 15-20% IRR.",
+    "displayOrder": 3
+  },
+  {
+    "id": 4,
+    "question": "What types of properties does MB Capital Group target?",
+    "answer": "We focus exclusively on 2-4 story Class B and C multifamily properties. These buildings typically range from 20-200 units and are located in growing Midwest markets with strong rental demand, stable employment, and population growth.",
+    "displayOrder": 4
+  },
+  {
+    "id": 5,
+    "question": "How do you communicate with investors?",
+    "answer": "We provide regular updates through quarterly reports detailing property performance, financial statements, and market insights. Investors also receive annual K1 tax documents and have access to our investor portal for document access and investment tracking.",
+    "displayOrder": 5
+  },
+  {
+    "id": 6,
+    "question": "What are the tax benefits of investing in syndications?",
+    "answer": "Multifamily syndications offer significant tax advantages including depreciation benefits that can offset rental income, cost segregation studies that accelerate depreciation, and potential for 1031 exchanges to defer capital gains taxes.",
+    "displayOrder": 6
+  },
+  {
+    "id": 7,
+    "question": "How do I get started as an investor?",
+    "answer": "Start by completing our investor registration form to join our network. We will send you information about upcoming opportunities, and you can schedule a consultation with Michael Bachmann to discuss your investment goals and learn about our current offerings.",
+    "displayOrder": 7
+  },
+  {
+    "id": 8,
+    "question": "Can I exit my investment early?",
+    "answer": "Syndication investments are typically illiquid with hold periods of 3-7 years. While early exit options are limited, we focus on properties with strong fundamentals and clear exit strategies to ensure investors can achieve their expected returns within the projected timeline.",
+    "displayOrder": 8
+  }
+];
+
+// Function to load team members (now from embedded data)
+function loadTeamMembers() {
+    console.log('Loading team members from embedded data...');
+    if (window.teamMembers && window.teamMembers.length > 0) {
+        renderTeamMembers(window.teamMembers);
+    } else {
+        console.error('No team members data found');
+    }
+}
+
+// Function to load blog posts (now from embedded data)
+function loadBlogPosts() {
+    console.log('Loading blog posts from embedded data...');
+    const blogContainer = document.getElementById('blog-posts-container');
+    if (!blogContainer) return;
+    
+    if (window.blogPosts && window.blogPosts.length > 0) {
+        const blogHtml = window.blogPosts.map(post => {
+            const icon = post.title.toLowerCase().includes('ai') ? '🤖' : 
+                        post.title.toLowerCase().includes('tax') ? '📊' : 
+                        post.title.toLowerCase().includes('market') ? '📈' : '🏢';
+            return `
+            <div class="blog-post">
+                <div class="blog-icon">${icon}</div>
+                <h3>${post.title}</h3>
+                <p class="blog-excerpt">${post.excerpt}</p>
+                <div class="blog-meta">
+                    <span>By ${post.author}</span>
+                    <span>${new Date(post.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                </div>
+            </div>
+            `;
+        }).join('');
+        blogContainer.innerHTML = blogHtml;
+    } else {
+        blogContainer.innerHTML = '<p style="text-align: center; color: #888;">Blog posts will be available soon.</p>';
+    }
+}
+
+// Function to load FAQs (now from embedded data)
+function loadFAQs() {
+    console.log('Loading FAQs from embedded data...');
+    const faqContainer = document.getElementById('faq-container');
+    if (!faqContainer) return;
+    
+    if (window.faqs && window.faqs.length > 0) {
+        const faqHtml = window.faqs.map((faq, index) => `
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(${index})">
+                <span>${faq.question}</span>
+                <span class="faq-toggle" id="faq-toggle-${index}">+</span>
+            </div>
+            <div class="faq-answer" id="faq-answer-${index}" style="display: none;">
+                <p>${faq.answer}</p>
+            </div>
+        </div>
+        `).join('');
+        faqContainer.innerHTML = faqHtml;
+    } else {
+        faqContainer.innerHTML = '<p style="text-align: center; color: #888;">Unable to load FAQs. Please try refreshing the page.</p>';
+    }
+}
+
+// FAQ toggle functionality
+function toggleFAQ(index) {
+    const answer = document.getElementById('faq-answer-' + index);
+    const toggle = document.getElementById('faq-toggle-' + index);
+    const question = toggle.parentElement;
+    
+    if (answer.style.display === 'none' || answer.style.display === '') {
+        answer.style.display = 'block';
+        toggle.textContent = '-';
+        question.style.color = 'hsl(0, 70%, 50%)';
+    } else {
+        answer.style.display = 'none';
+        toggle.textContent = '+';
+        question.style.color = '';
+    }
+}
+</script>
+
 </body>
 </html>
