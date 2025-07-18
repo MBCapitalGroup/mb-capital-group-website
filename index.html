@@ -432,10 +432,87 @@
     <section id="faq" class="section bg-light">
         <div class="container">
             <h2 class="section-title">Frequently Asked Questions</h2>
-            <div id="faq-container" style="max-width: 800px; margin: 0 auto;">
-                <div id="faq-loading" style="text-align: center; color: #64748b; padding: 2rem;">
-                    Loading frequently asked questions...
-                </div>
+            <div id="faq-container">
+<div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(0)">
+        <span>What is multifamily real estate syndication?</span>
+        <span class="faq-toggle" id="faq-toggle-0">+</span>
+    </div>
+    <div class="faq-answer" id="faq-answer-0" style="display: none;">
+        <p>Multifamily real estate syndication is an investment structure where multiple investors pool their capital to purchase larger apartment buildings that would be difficult to acquire individually. MB Capital Group acts as the syndicator, handling property acquisition, management, and investor relations while investors receive quarterly distributions and share in the profits upon sale.</p>
+    </div>
+</div>
+
+<div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(1)">
+        <span>What is the minimum investment amount?</span>
+        <span class="faq-toggle" id="faq-toggle-1">+</span>
+    </div>
+    <div class="faq-answer" id="faq-answer-1" style="display: none;">
+        <p>Our minimum investment typically ranges from 0,000 to 00,000 depending on the specific syndication opportunity. This allows accredited investors to participate in institutional-quality multifamily properties that would normally require millions of dollars to purchase outright.</p>
+    </div>
+</div>
+
+<div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(2)">
+        <span>How often do investors receive distributions?</span>
+        <span class="faq-toggle" id="faq-toggle-2">+</span>
+    </div>
+    <div class="faq-answer" id="faq-answer-2" style="display: none;">
+        <p>Investors receive quarterly cash distributions from rental income, typically targeting an 8% preferred return. Additionally, investors participate in profits when the property is sold, usually after a 3-7 year hold period, with total returns targeting 15-20% IRR.</p>
+    </div>
+</div>
+
+<div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(3)">
+        <span>What types of properties does MB Capital Group target?</span>
+        <span class="faq-toggle" id="faq-toggle-3">+</span>
+    </div>
+    <div class="faq-answer" id="faq-answer-3" style="display: none;">
+        <p>We focus exclusively on 2-4 story Class B and C multifamily properties. These buildings typically range from 20-200 units and are located in growing Midwest markets with strong rental demand, stable employment, and population growth.</p>
+    </div>
+</div>
+
+<div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(4)">
+        <span>How do you communicate with investors?</span>
+        <span class="faq-toggle" id="faq-toggle-4">+</span>
+    </div>
+    <div class="faq-answer" id="faq-answer-4" style="display: none;">
+        <p>We provide regular updates through quarterly reports detailing property performance, financial statements, and market insights. Investors also receive annual K1 tax documents and have access to our investor portal for document access and investment tracking.</p>
+    </div>
+</div>
+
+<div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(5)">
+        <span>What are the tax benefits of investing in syndications?</span>
+        <span class="faq-toggle" id="faq-toggle-5">+</span>
+    </div>
+    <div class="faq-answer" id="faq-answer-5" style="display: none;">
+        <p>Multifamily syndications offer significant tax advantages including depreciation benefits that can offset rental income, cost segregation studies that accelerate depreciation, and potential for 1031 exchanges to defer capital gains taxes.</p>
+    </div>
+</div>
+
+<div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(6)">
+        <span>How do I get started as an investor?</span>
+        <span class="faq-toggle" id="faq-toggle-6">+</span>
+    </div>
+    <div class="faq-answer" id="faq-answer-6" style="display: none;">
+        <p>Start by completing our investor registration form to join our network. We will send you information about upcoming opportunities, and you can schedule a consultation with Michael Bachmann to discuss your investment goals and learn about our current offerings.</p>
+    </div>
+</div>
+
+<div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(7)">
+        <span>Can I exit my investment early?</span>
+        <span class="faq-toggle" id="faq-toggle-7">+</span>
+    </div>
+    <div class="faq-answer" id="faq-answer-7" style="display: none;">
+        <p>Syndication investments are typically illiquid with hold periods of 3-7 years. While early exit options are limited, we focus on properties with strong fundamentals and clear exit strategies to ensure investors can achieve their expected returns within the projected timeline.</p>
+    </div>
+</div>
+</div>
                 <!-- FAQs will be loaded dynamically here -->
             </div>
         </div>
@@ -780,7 +857,7 @@
         }
         
         // Load blog posts dynamically from API
-        async function loadBlogPosts() {
+        async function {
             try {
                 const response = await fetch('/api/blog');
                 const blogPosts = await response.json();
@@ -829,7 +906,7 @@
         }
         
         // Load FAQs dynamically from database
-        async function loadFAQs() {
+        async function {
             try {
                 const response = await fetch('/api/faqs');
                 const faqs = await response.json();
@@ -968,8 +1045,6 @@
         }
         
         // Load dynamic content when page loads
-        loadBlogPosts();
-        loadFAQs();
         loadTeamMembers();
         
         console.log('MB Capital Group website loaded successfully with blog and admin login functionality');
