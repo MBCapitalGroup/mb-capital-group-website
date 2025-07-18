@@ -857,7 +857,8 @@
         
         // Function to open team member modal
         function openTeamModal(memberId) {
-            const member = teamMembers[memberId];
+            console.log('Opening modal for member:', memberId);
+            const member = window.modalTeamMembers && window.modalTeamMembers[memberId];
             if (member) {
                 document.getElementById('modalImage').src = member.image;
                 document.getElementById('modalImage').alt = member.name;
@@ -865,6 +866,9 @@
                 document.getElementById('modalTitle').textContent = member.title;
                 document.getElementById('modalBio').innerHTML = member.bio;
                 document.getElementById('teamModal').style.display = 'block';
+                console.log('Modal opened successfully for:', member.name);
+            } else {
+                console.error('Member not found:', memberId, 'Available members:', Object.keys(window.modalTeamMembers || {}));
             }
         }
         
@@ -1059,6 +1063,13 @@ function loadTeamMembers() {
             </div>
         `).join('');
         teamContainer.innerHTML = teamHtml;
+        
+        // Store team members for modal access
+        window.modalTeamMembers = {};
+        window.teamMembers.forEach((member, index) => {
+            window.modalTeamMembers[member.id] = member;
+        });
+        
         console.log('Team members loaded successfully:', window.teamMembers.length);
     } else {
         console.error('No team members data found');
@@ -1120,21 +1131,40 @@ function loadBlogPosts() {
 function loadFAQs() {
     console.log('Loading FAQs from embedded data...');
     const faqContainer = document.getElementById('faq-container');
-    if (!faqContainer) return;
+    if (!faqContainer) {
+        console.error('FAQ container not found');
+        return;
+    }
     
     if (window.faqs && window.faqs.length > 0) {
         const faqHtml = window.faqs.map((faq, index) => `
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFAQ(${index})">
+        <div class="faq-item" style="margin-bottom: 1rem; border: 1px solid #e2e8f0; border-radius: 8px; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+            <button class="faq-question" onclick="toggleFAQ(${index})" style="width: 100%; text-align: left; padding: 1.5rem; border: none; background: none; font-size: 1.1rem; font-weight: 600; color: hsl(219, 79%, 24%); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease;">
                 <span>${faq.question}</span>
-                <span class="faq-toggle" id="faq-toggle-${index}">+</span>
-            </div>
-            <div class="faq-answer" id="faq-answer-${index}" style="display: none;">
+                <span class="faq-toggle" id="faq-toggle-${index}" style="font-size: 1.2rem; color: hsl(43, 96%, 49%); font-weight: bold;">+</span>
+            </button>
+            <div class="faq-answer" id="faq-answer-${index}" style="display: none; padding: 0 1.5rem 1.5rem; color: #64748b; line-height: 1.6; border-top: 1px solid #f1f5f9;">
                 <p>${faq.answer}</p>
             </div>
         </div>
         `).join('');
         faqContainer.innerHTML = faqHtml;
+        
+        // Add hover effects CSS
+        if (!document.getElementById('faq-styles')) {
+            const style = document.createElement('style');
+            style.id = 'faq-styles';
+            style.textContent = `
+                .faq-item:hover {
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                    transform: translateY(-2px);
+                }
+                .faq-question:hover {
+                    background: rgba(43, 96, 199, 0.05) !important;
+                }
+            `;
+            document.head.appendChild(style);
+        }
     } else {
         faqContainer.innerHTML = '<p style="text-align: center; color: #888;">Unable to load FAQs. Please try refreshing the page.</p>';
     }
@@ -1148,12 +1178,12 @@ function toggleFAQ(index) {
     
     if (answer.style.display === 'none' || answer.style.display === '') {
         answer.style.display = 'block';
-        toggle.textContent = '-';
-        question.style.color = 'hsl(0, 70%, 50%)';
+        toggle.textContent = '−';
+        question.style.color = '#dc2626'; // Red color when expanded
     } else {
         answer.style.display = 'none';
         toggle.textContent = '+';
-        question.style.color = '';
+        question.style.color = 'hsl(219, 79%, 24%)'; // Back to navy
     }
 }
 </script>
