@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate Tax Calculator - Calculate Tax Benefits & Savings | MB Capital Group</title>
+    <meta name="description" content="Free real estate tax calculator. Calculate tax benefits from multifamily property investments including depreciation, cost segregation, and tax savings. Used by 1000+ investors.">
+    <meta name="keywords" content="tax calculator, real estate tax calculator, tax benefits calculator, depreciation calculator, cost segregation calculator, investment tax savings, multifamily tax benefits">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mbcapitalgroup.com/tax-calculator.html">
+    
+    <!-- Open Graph for Social Sharing -->
+    <meta property="og:title" content="Real Estate Tax Calculator - Calculate Investment Tax Benefits">
+    <meta property="og:description" content="Calculate tax benefits from real estate investments including depreciation and cost segregation savings. Free calculator tool for property investors.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mbcapitalgroup.com/tax-calculator.html">
+    <meta property="og:image" content="https://mbcapitalgroup.com/uploads/tax-calculator-preview.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Real Estate Tax Calculator - Calculate Investment Tax Benefits">
+    <meta name="twitter:description" content="Calculate tax benefits from real estate investments including depreciation and cost segregation savings.">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Real Estate Tax Benefits Calculator",
+      "description": "Calculate tax benefits from multifamily property investments including depreciation, cost segregation, and tax savings",
+      "url": "https://mbcapitalgroup.com/tax-calculator.html",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "provider": {
+        "@type": "Organization",
+        "name": "MB Capital Group",
+        "url": "https://mbcapitalgroup.com"
+      }
+    }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, hsl(219, 79%, 24%) 0%, hsl(219, 79%, 35%) 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, hsl(219, 79%, 24%) 0%, hsl(219, 79%, 35%) 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .home-button {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .home-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .seo-content {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .seo-content h2 {
+            color: hsl(219, 79%, 24%);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .seo-content h3 {
+            color: hsl(219, 79%, 24%);
+            margin-bottom: 0.75rem;
+            margin-top: 1.5rem;
+            font-size: 1.25rem;
+        }
+
+        .seo-content p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #495057;
+        }
+
+        .seo-content ul {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        .seo-content li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+            color: #495057;
+        }
+
+        .disclaimer {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 2rem 0;
+        }
+
+        .disclaimer h4 {
+            color: #856404;
+            margin-bottom: 0.5rem;
+        }
+
+        .disclaimer p {
+            color: #856404;
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, hsl(219, 79%, 24%) 0%, hsl(219, 79%, 35%) 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .cta-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .cta-section p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: hsl(43, 96%, 49%);
+            color: hsl(219, 79%, 24%);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: hsl(43, 96%, 55%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .calculator {
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: hsl(219, 79%, 24%);
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: hsl(219, 79%, 24%);
+        }
+
+        .btn {
+            background: hsl(43, 96%, 49%);
+            color: hsl(219, 79%, 24%);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: hsl(43, 96%, 42%);
+            transform: translateY(-2px);
+        }
+
+        .results {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: hsl(210, 40%, 98%);
+            border-radius: 8px;
+            border-left: 4px solid hsl(43, 96%, 49%);
+        }
+
+        .results h3 {
+            color: hsl(219, 79%, 24%);
+            margin-bottom: 1rem;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: hsl(219, 79%, 24%);
+        }
+
+        .savings {
+            color: hsl(120, 50%, 40%);
+            font-weight: 600;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            background: hsl(43, 96%, 49%);
+            color: hsl(219, 79%, 24%);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: hsl(43, 96%, 42%);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="/" class="home-button">← Home</a>
+            <h1>Tax Benefits Calculator</h1>
+            <p>Calculate potential tax savings from multifamily real estate investments</p>
+        </div>
+
+        <div class="calculator">
+            <div class="form-group">
+                <label for="investment-amount">Investment Amount</label>
+                <select id="investment-amount">
+                    <option value="">Select investment amount...</option>
+                    <option value="75000">$50,000 - $100,000</option>
+                    <option value="175000">$100,000 - $250,000</option>
+                    <option value="375000">$250,000 - $500,000</option>
+                    <option value="625000">$500,000 - $750,000</option>
+                    <option value="1000000">$1,000,000+</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="filing-status">Filing Status</label>
+                <select id="filing-status" onchange="updateTaxBrackets()">
+                    <option value="">Select filing status</option>
+                    <option value="single">Single</option>
+                    <option value="married">Married Filing Jointly</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="tax-bracket">Your Tax Bracket</label>
+                <select id="tax-bracket">
+                    <option value="">Select filing status first</option>
+                </select>
+            </div>
+
+            <button class="btn" onclick="calculateTaxBenefits()">Calculate Tax Benefits</button>
+
+            <div id="results" class="results" style="display: none;">
+                <h3>Estimated Tax Benefits</h3>
+                <div class="result-item">
+                    <span>Current Tax Bracket:</span>
+                    <span id="tax-bracket-result"></span>
+                </div>
+                <div class="result-item">
+                    <span>Standard Annual Depreciation:</span>
+                    <span id="depreciation" class="savings"></span>
+                </div>
+                <div class="result-item">
+                    <span>Cost Segregation Bonus Depreciation:</span>
+                    <span id="cost-segregation" class="savings"></span>
+                </div>
+                <div class="result-item">
+                    <span>Cost Segregation Tax Savings:</span>
+                    <span id="cost-segregation-savings" class="savings"></span>
+                </div>
+                <div class="result-item">
+                    <span>Total First-Year Tax Savings:</span>
+                    <span id="tax-savings" class="savings"></span>
+                </div>
+                <div class="result-item">
+                    <span><strong>Total First-Year Benefits:</strong></span>
+                    <span id="total-benefits" class="savings" style="font-weight: bold; font-size: 1.1em;"></span>
+                </div>
+                
+                <div style="margin-top: 20px; padding: 15px; background-color: #f8f9fa; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                    <h4 style="color: #1e3a8a; margin-bottom: 10px;">Cost Segregation Benefits</h4>
+                    <p style="font-size: 14px; color: #666; margin-bottom: 8px;">
+                        Cost segregation studies identify property components that can be depreciated over 5, 7, or 15 years instead of the standard 27.5 years for residential properties.
+                    </p>
+                    <p style="font-size: 14px; color: #666;">
+                        <strong>Typical benefits include:</strong> Flooring, fixtures, landscaping, parking lots, and specialized building components can often be accelerated.
+                    </p>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <a href="/tools.html" class="back-link">← Back to Tools</a>
+            </div>
+        </div>
+
+        <!-- Educational Content for SEO -->
+        <div class="seo-content">
+            <h2>Understanding Real Estate Tax Benefits & Depreciation</h2>
+            
+            <p>Real estate investments offer some of the most powerful tax advantages available to investors. This calculator helps you estimate potential tax savings from multifamily property investments, including standard depreciation and advanced cost segregation strategies.</p>
+
+            <h3>How Real Estate Depreciation Works</h3>
+            <p>The IRS allows property owners to deduct the cost of income-producing real estate over time through depreciation. For residential rental properties, the standard depreciation period is 27.5 years, meaning you can deduct approximately 3.64% of the property's value each year.</p>
+
+            <h3>Cost Segregation Benefits</h3>
+            <p>Cost segregation is an advanced tax strategy that can significantly accelerate your depreciation deductions. Through engineering-based studies, certain property components can be reclassified for faster depreciation:</p>
+            <ul>
+                <li><strong>5-year property:</strong> Appliances, carpeting, decorative lighting</li>
+                <li><strong>7-year property:</strong> Furniture and fixtures</li>
+                <li><strong>15-year property:</strong> Landscaping, parking lots, exterior lighting</li>
+                <li><strong>27.5-year property:</strong> Building structure (standard)</li>
+            </ul>
+
+            <h3>Investment Amount Considerations</h3>
+            <p>The tax benefits scale with your investment amount and tax bracket. Higher-income investors in top tax brackets see the most dramatic savings. This calculator uses the following investment tiers common in multifamily syndications:</p>
+            <ul>
+                <li><strong>$50k-$100k:</strong> Entry-level syndication investments</li>
+                <li><strong>$100k-$250k:</strong> Standard accredited investor participation</li>
+                <li><strong>$250k-$500k:</strong> Significant portfolio allocation</li>
+                <li><strong>$500k-$750k:</strong> High-net-worth investor level</li>
+                <li><strong>$1M+:</strong> Ultra-high-net-worth and institutional level</li>
+            </ul>
+
+            <h3>Why Choose Multifamily Real Estate?</h3>
+            <p>Multifamily properties offer unique advantages:</p>
+            <ul>
+                <li>Multiple income streams from various units</li>
+                <li>Professional management reduces hands-on involvement</li>
+                <li>Economies of scale in operations and maintenance</li>
+                <li>Strong demand fundamentals in growing markets</li>
+                <li>Inflation hedge through rent increases</li>
+            </ul>
+
+            <div class="disclaimer">
+                <h4>Important Disclaimer</h4>
+                <p>This calculator provides estimates for educational purposes only and should not be considered tax advice. Tax benefits depend on individual circumstances, property characteristics, and current tax laws. Always consult with a qualified tax professional or CPA before making investment decisions. Past performance does not guarantee future results.</p>
+            </div>
+        </div>
+
+        <!-- Call-to-Action Section -->
+        <div class="cta-section">
+            <h3>Ready to Explore Real Estate Investment Opportunities?</h3>
+            <p>MB Capital Group specializes in multifamily real estate syndications that maximize tax benefits while generating strong returns. Learn how our proven investment process can help you build wealth through real estate.</p>
+            <a href="/#investor-form" class="cta-button">Get Investment Information</a>
+        </div>
+    </div>
+
+    <script>
+        async function updateTaxBrackets() {
+            console.log('updateTaxBrackets called');
+            const filingStatus = document.getElementById('filing-status').value;
+            console.log('Filing status:', filingStatus);
+            const taxBracketSelect = document.getElementById('tax-bracket');
+            
+            // Clear existing options
+            taxBracketSelect.innerHTML = '';
+            
+            if (!filingStatus) {
+                taxBracketSelect.innerHTML = '<option value="">Select filing status first</option>';
+                return;
+            }
+            
+            try {
+                // Fetch tax brackets from database
+                const currentYear = new Date().getFullYear();
+                const response = await fetch(`/api/tax-brackets/${currentYear}`);
+                
+                if (!response.ok) {
+                    throw new Error('Failed to fetch tax brackets');
+                }
+                
+                const allBrackets = await response.json();
+                
+                // Filter brackets by filing status
+                const brackets = allBrackets.filter(bracket => bracket.filingStatus === filingStatus);
+                
+                if (brackets.length === 0) {
+                    taxBracketSelect.innerHTML = '<option value="">No tax brackets available for this filing status</option>';
+                    return;
+                }
+                
+                // Add default option
+                taxBracketSelect.innerHTML = '<option value="">Select your tax bracket...</option>';
+                
+                // Add bracket options
+                brackets.forEach(bracket => {
+                    const option = document.createElement('option');
+                    option.value = bracket.rate;
+                    option.textContent = bracket.label;
+                    taxBracketSelect.appendChild(option);
+                });
+                
+            } catch (error) {
+                console.error('Error fetching tax brackets:', error);
+                // Fallback to default message
+                taxBracketSelect.innerHTML = '<option value="">Error loading tax brackets</option>';
+            }
+        }
+
+        function calculateTaxBenefits() {
+            const investmentAmount = parseFloat(document.getElementById('investment-amount').value);
+            const filingStatus = document.getElementById('filing-status').value;
+            const taxRate = parseFloat(document.getElementById('tax-bracket').value);
+
+            if (!investmentAmount || !filingStatus || !taxRate) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Calculate standard depreciation (27.5 years)
+            const depreciationRate = 0.0364; // 27.5 years for residential real estate
+            const annualDepreciation = investmentAmount * depreciationRate;
+            const standardTaxSavings = annualDepreciation * taxRate;
+
+            // Calculate cost segregation benefits
+            // Typically 20-30% of property value can be accelerated to 5-15 year schedules
+            const costSegregationPercentage = 0.25; // 25% of property value
+            const acceleratedAmount = investmentAmount * costSegregationPercentage;
+            
+            // Accelerated depreciation rates (5-year and 15-year property)
+            const fiveYearRate = 0.20; // 20% first year for 5-year property
+            const fifteenYearRate = 0.05; // 5% first year for 15-year property
+            
+            // Split accelerated amount between 5-year (40%) and 15-year (60%) schedules
+            const fiveYearAmount = acceleratedAmount * 0.4;
+            const fifteenYearAmount = acceleratedAmount * 0.6;
+            
+            const fiveYearDepreciation = fiveYearAmount * fiveYearRate;
+            const fifteenYearDepreciation = fifteenYearAmount * fifteenYearRate;
+            const totalAcceleratedDepreciation = fiveYearDepreciation + fifteenYearDepreciation;
+            
+            const costSegregationTaxSavings = totalAcceleratedDepreciation * taxRate;
+
+            // Total benefits
+            const totalFirstYearDepreciation = annualDepreciation + totalAcceleratedDepreciation;
+            const totalTaxSavings = standardTaxSavings + costSegregationTaxSavings;
+
+            // Display results
+            document.getElementById('tax-bracket-result').textContent = (taxRate * 100) + '%';
+            document.getElementById('depreciation').textContent = '$' + annualDepreciation.toLocaleString();
+            document.getElementById('cost-segregation').textContent = '$' + totalAcceleratedDepreciation.toLocaleString();
+            document.getElementById('cost-segregation-savings').textContent = '$' + costSegregationTaxSavings.toLocaleString();
+            document.getElementById('tax-savings').textContent = '$' + totalTaxSavings.toLocaleString();
+            document.getElementById('total-benefits').textContent = '$' + totalTaxSavings.toLocaleString();
+            
+            document.getElementById('results').style.display = 'block';
+        }
+
+        // Track calculator usage for SEO analytics
+        function trackCalculatorUsage() {
+            // Track that someone used the calculator
+            const engagementData = {
+                action: 'calculator_usage',
+                category: 'tax_calculator',
+                label: 'tax_benefits_calculation',
+                value: 1,
+                investmentAmount: document.getElementById('investment-amount').value,
+                filingStatus: document.getElementById('filing-status').value,
+                taxBracket: document.getElementById('tax-bracket').value
+            };
+
+            // Send to analytics
+            fetch('/api/engagement/track', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(engagementData)
+            }).catch(error => {
+                console.log('Analytics tracking failed:', error);
+            });
+        }
+
+        // Track page view for tax calculator
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/api/engagement/track', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    action: 'page_view',
+                    category: 'tax_calculator',
+                    label: 'tax_calculator_page',
+                    value: 1
+                })
+            }).catch(error => {
+                console.log('Page view tracking failed:', error);
+            });
+        });
+
+        // Enhanced calculateTaxBenefits with tracking
+        const originalCalculate = calculateTaxBenefits;
+        calculateTaxBenefits = function() {
+            const result = originalCalculate();
+            trackCalculatorUsage();
+            return result;
+        };
+    </script>
+</body>
+</html>

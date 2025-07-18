@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Recommendation Settings - MB Capital Group Admin</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: hsl(219, 79%, 24%);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .section {
+            margin: 30px 0;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid hsl(43, 96%, 49%);
+            background: #f8f9fa;
+        }
+        
+        .section h2 {
+            color: hsl(219, 79%, 24%);
+            margin-top: 0;
+        }
+        
+        .form-group {
+            margin: 20px 0;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        select, input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            background: hsl(43, 96%, 49%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin: 10px 10px 10px 0;
+        }
+        
+        button:hover {
+            background: hsl(43, 96%, 45%);
+        }
+        
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .market-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+            margin: 15px 0;
+        }
+        
+        .market-card.priority-1 {
+            border-color: hsl(43, 96%, 49%);
+        }
+        
+        .market-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .priority-badge {
+            background: hsl(43, 96%, 49%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .inactive {
+            opacity: 0.6;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: hsl(43, 96%, 49%);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            border: 1px solid #bbdefb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            border: 1px solid #ffcc02;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 AI Recommendation Settings</h1>
+        
+        <div class="info-box">
+            <h3>How This Works</h3>
+            <p>Use this interface to control how the AI recommendation system works on your website. When you have active properties or want to focus on specific markets, you can easily adjust the settings here without needing any coding knowledge.</p>
+        </div>
+        
+        <div class="section">
+            <h2>Market Priorities</h2>
+            <p>Configure which markets the AI should prioritize when making recommendations to investors:</p>
+            
+            <div id="marketsContainer">
+                <!-- Markets will be loaded here -->
+            </div>
+            
+            <button onclick="addNewMarket()">+ Add New Market</button>
+        </div>
+        
+        <div class="section">
+            <h2>Recommendation Strategy</h2>
+            
+            <div class="form-group">
+                <label for="strategySelect">Primary Strategy:</label>
+                <select id="strategySelect" onchange="updateStrategy()">
+                    <option value="target_markets">Focus on Target Markets (Current)</option>
+                    <option value="active_properties">Prioritize Markets with Active Properties</option>
+                    <option value="balanced">Balanced Market Selection</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="messageText">Custom AI Message:</label>
+                <textarea id="messageText" rows="4" placeholder="e.g., 'We are actively seeking opportunities in this market and expect new deals to be available within the next 6 months.'"></textarea>
+            </div>
+            
+            <button onclick="saveStrategy()">Save Strategy</button>
+        </div>
+        
+        <div class="section">
+            <h2>Quick Actions</h2>
+            
+            <div class="warning-box">
+                <h3>When You Get Active Properties:</h3>
+                <p>Simply mark the market as "Has Active Properties" and set it to Priority 1. The AI will automatically start recommending that market to suitable investors.</p>
+            </div>
+            
+            <button onclick="initializeDefaultMarkets()">Initialize Default Markets</button>
+            <button onclick="exportSettings()" style="background: #6c757d;">Export Settings</button>
+            <button onclick="resetToDefaults()" style="background: #dc3545;">Reset to Defaults</button>
+        </div>
+        
+        <div id="messageDiv" style="display: none;"></div>
+    </div>
+
+    <script>
+        let markets = [];
+        
+        // Load markets on page load
+        document.addEventListener('DOMContentLoaded', loadMarkets);
+        
+        async function loadMarkets() {
+            try {
+                // For now, we'll initialize with default markets
+                // In production, this would fetch from the API
+                markets = [
+                    {
+                        marketId: 'kansas-city-mo',
+                        marketName: 'Kansas City, MO',
+                        priority: 1,
+                        isActive: true,
+                        hasActiveProperties: false,
+                        description: 'Primary target market with strong fundamentals',
+                        targetInvestorTypes: '["moderate", "conservative"]'
+                    },
+                    {
+                        marketId: 'st-louis-mo',
+                        marketName: 'St. Louis, MO',
+                        priority: 2,
+                        isActive: true,
+                        hasActiveProperties: false,
+                        description: 'Secondary market for conservative investors',
+                        targetInvestorTypes: '["conservative"]'
+                    },
+                    {
+                        marketId: 'columbus-oh',
+                        marketName: 'Columbus, OH',
+                        priority: 3,
+                        isActive: true,
+                        hasActiveProperties: false,
+                        description: 'Expansion market for aggressive investors',
+                        targetInvestorTypes: '["aggressive"]'
+                    },
+                    {
+                        marketId: 'indianapolis-in',
+                        marketName: 'Indianapolis, IN',
+                        priority: 4,
+                        isActive: false,
+                        hasActiveProperties: false,
+                        description: 'Future expansion consideration',
+                        targetInvestorTypes: '["moderate", "aggressive"]'
+                    }
+                ];
+                renderMarkets();
+            } catch (error) {
+                showMessage('Error loading markets: ' + error.message, 'error');
+            }
+        }
+        
+        function renderMarkets() {
+            const container = document.getElementById('marketsContainer');
+            container.innerHTML = '';
+            
+            markets.sort((a, b) => a.priority - b.priority);
+            
+            markets.forEach(market => {
+                const marketCard = document.createElement('div');
+                marketCard.className = `market-card ${market.priority === 1 ? 'priority-1' : ''} ${!market.isActive ? 'inactive' : ''}`;
+                
+                marketCard.innerHTML = `
+                    <div class="market-header">
+                        <h3>${market.marketName}</h3>
+                        <div>
+                            <span class="priority-badge">Priority ${market.priority}</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" ${market.isActive ? 'checked' : ''} onchange="toggleMarket('${market.marketId}')">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Priority (1 = highest):</label>
+                        <input type="number" value="${market.priority}" min="1" max="10" onchange="updateMarketPriority('${market.marketId}', this.value)">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Has Active Properties:</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" ${market.hasActiveProperties ? 'checked' : ''} onchange="toggleActiveProperties('${market.marketId}')">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <input type="text" value="${market.description || ''}" onchange="updateMarketDescription('${market.marketId}', this.value)">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Target Investor Types:</label>
+                        <select multiple onchange="updateInvestorTypes('${market.marketId}', this)">
+                            <option value="conservative" ${market.targetInvestorTypes?.includes('conservative') ? 'selected' : ''}>Conservative</option>
+                            <option value="moderate" ${market.targetInvestorTypes?.includes('moderate') ? 'selected' : ''}>Moderate</option>
+                            <option value="aggressive" ${market.targetInvestorTypes?.includes('aggressive') ? 'selected' : ''}>Aggressive</option>
+                        </select>
+                    </div>
+                `;
+                
+                container.appendChild(marketCard);
+            });
+        }
+        
+        function toggleMarket(marketId) {
+            const market = markets.find(m => m.marketId === marketId);
+            if (market) {
+                market.isActive = !market.isActive;
+                renderMarkets();
+                showMessage(`${market.marketName} ${market.isActive ? 'activated' : 'deactivated'}`, 'success');
+            }
+        }
+        
+        function toggleActiveProperties(marketId) {
+            const market = markets.find(m => m.marketId === marketId);
+            if (market) {
+                market.hasActiveProperties = !market.hasActiveProperties;
+                showMessage(`${market.marketName} active properties: ${market.hasActiveProperties ? 'YES' : 'NO'}`, 'success');
+            }
+        }
+        
+        function updateMarketPriority(marketId, newPriority) {
+            const market = markets.find(m => m.marketId === marketId);
+            if (market) {
+                market.priority = parseInt(newPriority);
+                renderMarkets();
+                showMessage(`${market.marketName} priority updated to ${newPriority}`, 'success');
+            }
+        }
+        
+        function updateMarketDescription(marketId, description) {
+            const market = markets.find(m => m.marketId === marketId);
+            if (market) {
+                market.description = description;
+                showMessage(`${market.marketName} description updated`, 'success');
+            }
+        }
+        
+        function updateInvestorTypes(marketId, selectElement) {
+            const market = markets.find(m => m.marketId === marketId);
+            if (market) {
+                const selectedTypes = Array.from(selectElement.selectedOptions).map(option => option.value);
+                market.targetInvestorTypes = JSON.stringify(selectedTypes);
+                showMessage(`${market.marketName} target investors updated`, 'success');
+            }
+        }
+        
+        function addNewMarket() {
+            const marketName = prompt('Enter market name (e.g., "Denver, CO"):');
+            if (marketName) {
+                const marketId = marketName.toLowerCase().replace(/[^a-z0-9]/g, '-');
+                const newMarket = {
+                    marketId: marketId,
+                    marketName: marketName,
+                    priority: markets.length + 1,
+                    isActive: true,
+                    hasActiveProperties: false,
+                    description: 'New market',
+                    targetInvestorTypes: '["moderate"]'
+                };
+                markets.push(newMarket);
+                renderMarkets();
+                showMessage(`${marketName} added successfully`, 'success');
+            }
+        }
+        
+        function updateStrategy() {
+            const strategy = document.getElementById('strategySelect').value;
+            showMessage(`Strategy updated to: ${strategy}`, 'success');
+        }
+        
+        function saveStrategy() {
+            const message = document.getElementById('messageText').value;
+            showMessage('Strategy and message saved successfully', 'success');
+        }
+        
+        function initializeDefaultMarkets() {
+            loadMarkets();
+            showMessage('Default markets initialized', 'success');
+        }
+        
+        function exportSettings() {
+            const settings = {
+                markets: markets,
+                strategy: document.getElementById('strategySelect').value,
+                customMessage: document.getElementById('messageText').value
+            };
+            
+            const dataStr = JSON.stringify(settings, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'ai-recommendation-settings.json';
+            link.click();
+            
+            showMessage('Settings exported successfully', 'success');
+        }
+        
+        function resetToDefaults() {
+            if (confirm('Are you sure you want to reset all settings to defaults?')) {
+                loadMarkets();
+                document.getElementById('strategySelect').value = 'target_markets';
+                document.getElementById('messageText').value = '';
+                showMessage('Settings reset to defaults', 'success');
+            }
+        }
+        
+        function showMessage(message, type) {
+            const messageDiv = document.getElementById('messageDiv');
+            messageDiv.className = type;
+            messageDiv.textContent = message;
+            messageDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

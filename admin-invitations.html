@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investor Invitations - MB Capital Group Admin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            background: linear-gradient(135deg, hsl(219, 79%, 24%) 0%, hsl(219, 79%, 35%) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus {
+            outline: none;
+            border-color: hsl(219, 79%, 24%);
+        }
+
+        .btn {
+            background: hsl(219, 79%, 24%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: hsl(219, 79%, 20%);
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+
+        .success-message {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #a7f3d0;
+        }
+
+        .error-message {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #fecaca;
+        }
+
+        .invitations-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .invitations-table th,
+        .invitations-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .invitations-table th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-used {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .status-expired {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: hsl(219, 79%, 24%);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .back-button:hover {
+            color: hsl(219, 79%, 20%);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/admin" class="back-button">← Back to Admin Dashboard</a>
+        
+        <div class="header">
+            <h1>🎯 Investor Invitations</h1>
+            <p>Send secure invitations to new investors</p>
+        </div>
+
+        <div class="card">
+            <h2>Send New Invitation</h2>
+            <div id="message" style="display: none;"></div>
+            
+            <form id="invitationForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <button type="submit" class="btn">Send Invitation</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>Recent Invitations</h2>
+            <div id="invitationsLoading">Loading invitations...</div>
+            <div id="invitationsContainer" style="display: none;">
+                <table class="invitations-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Expires</th>
+                            <th>Sent</th>
+                        </tr>
+                    </thead>
+                    <tbody id="invitationsBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if admin is logged in
+        if (!sessionStorage.getItem('adminLoggedIn')) {
+            window.location.href = '/admin';
+        }
+
+        function showMessage(message, type = 'success') {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = message;
+            messageEl.className = type === 'success' ? 'success-message' : 'error-message';
+            messageEl.style.display = 'block';
+            
+            setTimeout(() => {
+                messageEl.style.display = 'none';
+            }, 5000);
+        }
+
+        function getStatusBadge(invitation) {
+            const now = new Date();
+            const expires = new Date(invitation.expiresAt);
+            
+            if (invitation.isUsed) {
+                return '<span class="status-badge status-used">Used</span>';
+            } else if (now > expires) {
+                return '<span class="status-badge status-expired">Expired</span>';
+            } else {
+                return '<span class="status-badge status-active">Active</span>';
+            }
+        }
+
+        async function loadInvitations() {
+            try {
+                const response = await fetch('/api/admin/invitations');
+                if (response.ok) {
+                    const invitations = await response.json();
+                    const tbody = document.getElementById('invitationsBody');
+                    
+                    tbody.innerHTML = invitations.map(invitation => `
+                        <tr>
+                            <td>${invitation.firstName} ${invitation.lastName}</td>
+                            <td>${invitation.email}</td>
+                            <td>${getStatusBadge(invitation)}</td>
+                            <td>${new Date(invitation.expiresAt).toLocaleDateString()}</td>
+                            <td>${new Date(invitation.createdAt).toLocaleDateString()}</td>
+                        </tr>
+                    `).join('');
+                    
+                    document.getElementById('invitationsLoading').style.display = 'none';
+                    document.getElementById('invitationsContainer').style.display = 'block';
+                } else {
+                    throw new Error('Failed to load invitations');
+                }
+            } catch (error) {
+                console.error('Error loading invitations:', error);
+                document.getElementById('invitationsLoading').textContent = 'Error loading invitations';
+            }
+        }
+
+        document.getElementById('invitationForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            
+            try {
+                const response = await fetch('/api/admin/send-invitation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    showMessage(`Invitation sent successfully to ${data.email}!`, 'success');
+                    e.target.reset();
+                    loadInvitations(); // Refresh the list
+                } else {
+                    showMessage(result.error || 'Failed to send invitation', 'error');
+                }
+            } catch (error) {
+                console.error('Error sending invitation:', error);
+                showMessage('Failed to send invitation. Please try again.', 'error');
+            }
+        });
+
+        // Load invitations on page load
+        loadInvitations();
+    </script>
+</body>
+</html>

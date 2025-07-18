@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin User Management - MB Capital Group</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8fafc; color: #334155; }
+        
+        .header { background: hsl(219, 79%, 24%); color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; }
+        .nav-links { display: flex; gap: 1rem; }
+        .nav-links a { color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px; transition: background-color 0.2s; }
+        .nav-links a:hover { background: rgba(255,255,255,0.1); }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .page-title { font-size: 2rem; margin-bottom: 2rem; color: hsl(219, 79%, 24%); }
+        
+        .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+        
+        .card { background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .card h3 { margin-bottom: 1.5rem; color: hsl(219, 79%, 24%); display: flex; align-items: center; gap: 0.5rem; }
+        
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151; }
+        .form-group input, .form-group select { width: 100%; padding: 0.75rem; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: hsl(219, 79%, 24%); }
+        
+        .btn { padding: 0.75rem 1.5rem; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .btn-primary { background: hsl(219, 79%, 24%); color: white; }
+        .btn-primary:hover { background: hsl(219, 79%, 20%); }
+        .btn-danger { background: #dc2626; color: white; }
+        .btn-danger:hover { background: #b91c1c; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .admin-list { background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .admin-list h3 { margin-bottom: 1.5rem; color: hsl(219, 79%, 24%); }
+        
+        .admin-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem; border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 1rem; }
+        .admin-info { flex: 1; }
+        .admin-username { font-weight: 600; color: #1f2937; }
+        .admin-created { color: #64748b; font-size: 0.9rem; }
+        .admin-actions { display: flex; gap: 0.5rem; }
+        
+        .message { padding: 1rem; border-radius: 8px; margin-bottom: 1rem; }
+        .message.success { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+        .message.error { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+        
+        .current-admin { background: #f0f9ff; border-color: #0ea5e9; }
+        .current-admin-badge { background: #0ea5e9; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; }
+        
+        @media (max-width: 768px) {
+            .admin-grid { grid-template-columns: 1fr; }
+            .admin-item { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .admin-actions { width: 100%; justify-content: flex-end; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">MB Capital Group - Admin Users</div>
+        <div class="nav-links">
+            <a href="/admin">← Back to Dashboard</a>
+            <a href="/" target="_blank">View Website</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h1 class="page-title">Admin User Management</h1>
+        
+        <div id="message" class="message" style="display: none;"></div>
+        
+        <div class="admin-grid">
+            <!-- Create New Admin -->
+            <div class="card">
+                <h3>👤 Create New Admin Account</h3>
+                <form id="createAdminForm" onsubmit="createAdmin(event)">
+                    <div class="form-group">
+                        <label for="newUsername">Username</label>
+                        <input type="text" id="newUsername" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">Password</label>
+                        <input type="password" id="newPassword" name="password" required minlength="8">
+                        <small style="color: #64748b;">Minimum 8 characters</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required minlength="8">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create Admin Account</button>
+                </form>
+            </div>
+            
+            <!-- Instructions -->
+            <div class="card">
+                <h3>📋 Instructions for Testers</h3>
+                <p style="margin-bottom: 1rem; color: #64748b;">Share these credentials with trusted testers:</p>
+                <ul style="margin-left: 1.5rem; color: #64748b; line-height: 1.6;">
+                    <li><strong>Admin URL:</strong> <code>[your-replit-url]/admin</code></li>
+                    <li><strong>Username:</strong> Provide the username you create</li>
+                    <li><strong>Password:</strong> Provide the password you create</li>
+                </ul>
+                <div style="margin-top: 1.5rem; padding: 1rem; background: #f0f9ff; border-radius: 8px;">
+                    <p style="font-weight: 600; color: #0ea5e9; margin-bottom: 0.5rem;">Security Tips:</p>
+                    <ul style="margin-left: 1.5rem; color: #0369a1; font-size: 0.9rem; line-height: 1.6;">
+                        <li>Create separate accounts for each tester</li>
+                        <li>Delete accounts when testing is complete</li>
+                        <li>Use simple, temporary passwords for testing</li>
+                        <li>Monitor admin activity during testing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Admin List -->
+        <div class="admin-list">
+            <h3>👥 Current Admin Accounts</h3>
+            <div id="adminsList">
+                <p style="color: #64748b;">Loading admin accounts...</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let currentAdminId = null;
+        
+        // Load admin accounts on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAdmins();
+            getCurrentAdmin();
+        });
+        
+        async function getCurrentAdmin() {
+            try {
+                const response = await fetch('/api/admin/status');
+                const data = await response.json();
+                if (data.isAuthenticated && data.admin) {
+                    currentAdminId = data.admin.adminId;
+                }
+            } catch (error) {
+                console.error('Failed to get current admin:', error);
+            }
+        }
+        
+        async function createAdmin(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const username = formData.get('username');
+            const password = formData.get('password');
+            const confirmPassword = formData.get('confirmPassword');
+            
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                showMessage('Passwords do not match', 'error');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/admin/create-admin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    showMessage(`Admin account "${username}" created successfully!`, 'success');
+                    event.target.reset();
+                    loadAdmins(); // Refresh the list
+                } else {
+                    showMessage(result.error || 'Failed to create admin account', 'error');
+                }
+            } catch (error) {
+                console.error('Create admin error:', error);
+                showMessage('Failed to create admin account. Please try again.', 'error');
+            }
+        }
+        
+        async function loadAdmins() {
+            try {
+                const response = await fetch('/api/admin/list-admins');
+                const admins = await response.json();
+                
+                const adminsList = document.getElementById('adminsList');
+                
+                if (admins.length === 0) {
+                    adminsList.innerHTML = '<p style="color: #64748b;">No admin accounts found.</p>';
+                    return;
+                }
+                
+                adminsList.innerHTML = admins.map(admin => {
+                    const isCurrentAdmin = admin.id === currentAdminId;
+                    const createdDate = new Date(admin.createdAt).toLocaleDateString();
+                    
+                    return `
+                        <div class="admin-item ${isCurrentAdmin ? 'current-admin' : ''}">
+                            <div class="admin-info">
+                                <div class="admin-username">
+                                    ${admin.username}
+                                    ${isCurrentAdmin ? '<span class="current-admin-badge">You</span>' : ''}
+                                </div>
+                                <div class="admin-created">Created: ${createdDate}</div>
+                            </div>
+                            <div class="admin-actions">
+                                ${!isCurrentAdmin ? `
+                                    <button class="btn btn-danger" onclick="deleteAdmin(${admin.id}, '${admin.username}')">
+                                        Delete
+                                    </button>
+                                ` : ''}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } catch (error) {
+                console.error('Load admins error:', error);
+                document.getElementById('adminsList').innerHTML = 
+                    '<p style="color: #dc2626;">Failed to load admin accounts.</p>';
+            }
+        }
+        
+        async function deleteAdmin(adminId, username) {
+            if (!confirm(`Are you sure you want to delete the admin account "${username}"? This action cannot be undone.`)) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/api/admin/delete-admin/${adminId}`, {
+                    method: 'DELETE'
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    showMessage(`Admin account "${username}" deleted successfully`, 'success');
+                    loadAdmins(); // Refresh the list
+                } else {
+                    showMessage(result.error || 'Failed to delete admin account', 'error');
+                }
+            } catch (error) {
+                console.error('Delete admin error:', error);
+                showMessage('Failed to delete admin account. Please try again.', 'error');
+            }
+        }
+        
+        function showMessage(message, type) {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = message;
+            messageEl.className = `message ${type}`;
+            messageEl.style.display = 'block';
+            
+            // Auto-hide success messages after 5 seconds
+            if (type === 'success') {
+                setTimeout(() => {
+                    messageEl.style.display = 'none';
+                }, 5000);
+            }
+        }
+    </script>
+</body>
+</html>

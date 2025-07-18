@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate Market Intelligence Dashboard - Live Multifamily Data | MB Capital Group</title>
+    <meta name="description" content="Free real estate market intelligence dashboard with live multifamily data for Kansas City, St. Louis, Columbus, and Indianapolis. Track rent growth, occupancy rates, and cap rates." />
+    <meta name="keywords" content="real estate market data, multifamily market intelligence, market analysis dashboard, rent growth data, occupancy rates, cap rates, real estate market trends" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mbcapitalgroup.com/market-intelligence.html" />
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Real Estate Market Intelligence Dashboard - Live Multifamily Data" />
+    <meta property="og:description" content="Access real-time multifamily market data and intelligence for key Midwest markets. Track trends and opportunities." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mbcapitalgroup.com/market-intelligence.html" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Real Estate Market Intelligence Dashboard" />
+    <meta name="twitter:description" content="Live multifamily market data and trends for Kansas City, St. Louis, Columbus, and Indianapolis." />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Market Intelligence Dashboard",
+      "description": "Real-time market intelligence platform for multifamily real estate investments",
+      "url": "https://mbcapitalgroup.com/market-intelligence.html",
+      "applicationCategory": "FinanceApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "provider": {
+        "@type": "Organization",
+        "name": "MB Capital Group"
+      }
+    }
+    </script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; background: #f8fafc; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        header { background: hsl(219, 79%, 24%); color: white; padding: 1rem 0; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; }
+        .logo-text { font-size: 1.25rem; font-weight: bold; }
+        .nav-link { color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px; transition: background-color 0.3s; }
+        .nav-link:hover { background-color: rgba(255,255,255,0.1); }
+        
+        .dashboard { padding: 2rem 0; }
+        .dashboard-title { text-align: center; font-size: 2.5rem; margin-bottom: 1rem; color: hsl(219, 79%, 24%); }
+        .dashboard-subtitle { text-align: center; color: #64748b; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+        
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem; }
+        .market-card { background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .market-card h3 { color: hsl(219, 79%, 24%); margin-bottom: 1rem; font-size: 1.4rem; }
+        .metric-row { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid #f1f5f9; }
+        .metric-row:last-child { border-bottom: none; }
+        .metric-label { font-weight: 500; color: #64748b; }
+        .metric-value { font-weight: bold; color: hsl(219, 79%, 24%); }
+        .metric-positive { color: #10b981; }
+        .metric-negative { color: #ef4444; }
+        
+        .comparison-section { background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 3rem; }
+        .comparison-title { color: hsl(219, 79%, 24%); margin-bottom: 1.5rem; font-size: 1.6rem; }
+        .comparison-controls { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .market-selector { display: flex; align-items: center; gap: 0.5rem; }
+        .market-checkbox { margin-right: 0.5rem; }
+        .compare-btn { background: hsl(43, 96%, 49%); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: background-color 0.3s; }
+        .compare-btn:hover { background: hsl(43, 96%, 42%); }
+        
+        .insights-section { background: hsl(210, 40%, 98%); border-radius: 12px; padding: 2rem; margin-bottom: 3rem; }
+        .insights-title { color: hsl(219, 79%, 24%); margin-bottom: 1rem; font-size: 1.4rem; }
+        .insight-item { background: white; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        
+        .forecast-section { background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .forecast-title { color: hsl(219, 79%, 24%); margin-bottom: 1.5rem; font-size: 1.6rem; }
+        .forecast-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+        .forecast-card { border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.5rem; }
+        .forecast-market { font-weight: bold; color: hsl(219, 79%, 24%); margin-bottom: 1rem; }
+        
+        .loading { text-align: center; color: #64748b; padding: 2rem; }
+        .error { background: #fef2f2; color: #dc2626; padding: 1rem; border-radius: 8px; margin: 1rem 0; }
+        
+        @media (max-width: 768px) {
+            .comparison-controls { flex-direction: column; }
+            .market-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-text">MB Capital Group</div>
+                </div>
+                <a href="/" class="nav-link">← Back to Main Site</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard">
+        <div class="container">
+            <h1 class="dashboard-title">Market Intelligence Dashboard</h1>
+            <p class="dashboard-subtitle">
+                Real-time market data and analytics for multifamily real estate investments across key Midwest markets.
+            </p>
+
+            <div id="marketData" class="market-grid">
+                <div class="loading">Loading market data...</div>
+            </div>
+
+            <div class="comparison-section">
+                <h2 class="comparison-title">Market Comparison Tool</h2>
+                <div class="comparison-controls">
+                    <div class="market-selector">
+                        <input type="checkbox" id="kansas-city-mo" class="market-checkbox" value="kansas-city-mo">
+                        <label for="kansas-city-mo">Kansas City, MO</label>
+                    </div>
+                    <div class="market-selector">
+                        <input type="checkbox" id="st-louis-mo" class="market-checkbox" value="st-louis-mo">
+                        <label for="st-louis-mo">St. Louis, MO</label>
+                    </div>
+                    <div class="market-selector">
+                        <input type="checkbox" id="columbus-oh" class="market-checkbox" value="columbus-oh">
+                        <label for="columbus-oh">Columbus, OH</label>
+                    </div>
+                    <div class="market-selector">
+                        <input type="checkbox" id="indianapolis-in" class="market-checkbox" value="indianapolis-in">
+                        <label for="indianapolis-in">Indianapolis, IN</label>
+                    </div>
+                    <button class="compare-btn" onclick="compareMarkets()">Compare Selected Markets</button>
+                </div>
+                <div id="comparisonResults"></div>
+            </div>
+
+            <div class="insights-section">
+                <h2 class="insights-title">Market Insights</h2>
+                <div id="marketInsights">
+                    <div class="loading">Analyzing market trends...</div>
+                </div>
+            </div>
+
+            <div class="forecast-section">
+                <h2 class="forecast-title">Market Forecasts</h2>
+                <div id="marketForecasts" class="forecast-grid">
+                    <div class="loading">Loading forecasts...</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Load market data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadMarketData();
+            loadMarketForecasts();
+        });
+
+        async function loadMarketData() {
+            try {
+                const response = await fetch('/api/markets');
+                const markets = await response.json();
+                
+                const marketGrid = document.getElementById('marketData');
+                marketGrid.innerHTML = '';
+                
+                markets.forEach(market => {
+                    const marketCard = createMarketCard(market);
+                    marketGrid.appendChild(marketCard);
+                });
+                
+            } catch (error) {
+                console.error('Error loading market data:', error);
+                document.getElementById('marketData').innerHTML = 
+                    '<div class="error">Failed to load market data. Please try again later.</div>';
+            }
+        }
+
+        function createMarketCard(market) {
+            const card = document.createElement('div');
+            card.className = 'market-card';
+            
+            card.innerHTML = `
+                <h3>${market.city}, ${market.state}</h3>
+                <div class="metric-row">
+                    <span class="metric-label">Median Rent</span>
+                    <span class="metric-value">$${market.medianRent.toLocaleString()}</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Occupancy Rate</span>
+                    <span class="metric-value">${market.occupancyRate}%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Rent Growth (YoY)</span>
+                    <span class="metric-value ${market.rentGrowthYoY > 3 ? 'metric-positive' : ''}">${market.rentGrowthYoY}%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Job Growth</span>
+                    <span class="metric-value ${market.jobGrowth > 2 ? 'metric-positive' : ''}">${market.jobGrowth}%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Cap Rate Average</span>
+                    <span class="metric-value">${market.capRateAverage}%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Price Per Unit</span>
+                    <span class="metric-value">$${market.pricePerUnit.toLocaleString()}</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Population Growth</span>
+                    <span class="metric-value ${market.populationGrowth > 1 ? 'metric-positive' : ''}">${market.populationGrowth}%</span>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        async function compareMarkets() {
+            const checkedBoxes = document.querySelectorAll('.market-checkbox:checked');
+            const marketIds = Array.from(checkedBoxes).map(box => box.value);
+            
+            if (marketIds.length < 2) {
+                alert('Please select at least 2 markets to compare.');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/market-comparison', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ marketIds })
+                });
+                
+                const comparison = await response.json();
+                displayComparison(comparison);
+                displayInsights(comparison.insights);
+                
+            } catch (error) {
+                console.error('Error comparing markets:', error);
+                document.getElementById('comparisonResults').innerHTML = 
+                    '<div class="error">Failed to compare markets. Please try again.</div>';
+            }
+        }
+
+        function displayComparison(comparison) {
+            const resultsDiv = document.getElementById('comparisonResults');
+            
+            if (comparison.markets.length === 0) {
+                resultsDiv.innerHTML = '<p>No markets selected for comparison.</p>';
+                return;
+            }
+            
+            let html = '<div class="market-grid">';
+            
+            comparison.markets.forEach(market => {
+                html += `
+                    <div class="market-card">
+                        <h3>${market.city}, ${market.state}</h3>
+                        <div class="metric-row">
+                            <span class="metric-label">Rent Growth</span>
+                            <span class="metric-value">${market.rentGrowthYoY}%</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Occupancy</span>
+                            <span class="metric-value">${market.occupancyRate}%</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Job Growth</span>
+                            <span class="metric-value">${market.jobGrowth}%</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Cap Rate</span>
+                            <span class="metric-value">${market.capRateAverage}%</span>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            resultsDiv.innerHTML = html;
+        }
+
+        function displayInsights(insights) {
+            const insightsDiv = document.getElementById('marketInsights');
+            
+            if (insights.length === 0) {
+                insightsDiv.innerHTML = '<p>No insights available. Please compare markets to see insights.</p>';
+                return;
+            }
+            
+            let html = '';
+            insights.forEach(insight => {
+                html += `<div class="insight-item">💡 ${insight}</div>`;
+            });
+            
+            insightsDiv.innerHTML = html;
+        }
+
+        async function loadMarketForecasts() {
+            const markets = ['kansas-city-mo', 'st-louis-mo', 'columbus-oh', 'indianapolis-in'];
+            const forecastsDiv = document.getElementById('marketForecasts');
+            
+            try {
+                const forecasts = await Promise.all(
+                    markets.map(async (marketId) => {
+                        const response = await fetch(`/api/market-forecast/${marketId}`);
+                        return await response.json();
+                    })
+                );
+                
+                forecastsDiv.innerHTML = '';
+                
+                forecasts.forEach(forecast => {
+                    if (forecast && !forecast.error) {
+                        const forecastCard = createForecastCard(forecast);
+                        forecastsDiv.appendChild(forecastCard);
+                    }
+                });
+                
+            } catch (error) {
+                console.error('Error loading forecasts:', error);
+                forecastsDiv.innerHTML = 
+                    '<div class="error">Failed to load forecasts. Please try again later.</div>';
+            }
+        }
+
+        function createForecastCard(forecast) {
+            const card = document.createElement('div');
+            card.className = 'forecast-card';
+            
+            card.innerHTML = `
+                <div class="forecast-market">${forecast.market}</div>
+                <div class="metric-row">
+                    <span class="metric-label">Projected Rent Growth</span>
+                    <span class="metric-value">${forecast.projectedRentGrowth.toFixed(1)}%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Projected Occupancy</span>
+                    <span class="metric-value">${forecast.projectedOccupancy}%</span>
+                </div>
+                <div style="margin-top: 1rem;">
+                    <strong style="color: hsl(219, 79%, 24%);">Opportunities:</strong>
+                    <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                        ${forecast.opportunities.map(opp => `<li>${opp}</li>`).join('')}
+                    </ul>
+                </div>
+                ${forecast.riskFactors.length > 0 ? `
+                <div style="margin-top: 1rem;">
+                    <strong style="color: #dc2626;">Risk Factors:</strong>
+                    <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                        ${forecast.riskFactors.map(risk => `<li>${risk}</li>`).join('')}
+                    </ul>
+                </div>
+                ` : ''}
+            `;
+            
+            return card;
+        }
+    </script>
+</body>
+</html>

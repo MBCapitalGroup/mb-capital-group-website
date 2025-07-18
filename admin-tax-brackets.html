@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tax Bracket Management - MB Capital Group Admin</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: #f8fafc;
+      color: #1a202c;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .header {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+      border-left: 4px solid #1e3a8a;
+    }
+
+    .header h1 {
+      color: #1e3a8a;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .header p {
+      color: #64748b;
+      font-size: 1.1rem;
+    }
+
+    .back-button {
+      background: #6b7280;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      transition: background 0.3s;
+    }
+
+    .back-button:hover {
+      background: #374151;
+    }
+
+    .section {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+
+    .section h2 {
+      color: #1e3a8a;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid #f59e0b;
+      padding-bottom: 0.5rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #374151;
+    }
+
+    .form-group input,
+    .form-group select {
+      padding: 0.75rem;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #1e3a8a;
+      box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .btn-primary {
+      background: #1e3a8a;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #1e40af;
+    }
+
+    .btn-success {
+      background: #10b981;
+      color: white;
+    }
+
+    .btn-success:hover {
+      background: #059669;
+    }
+
+    .btn-warning {
+      background: #f59e0b;
+      color: white;
+    }
+
+    .btn-warning:hover {
+      background: #d97706;
+    }
+
+    .btn-danger {
+      background: #ef4444;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background: #dc2626;
+    }
+
+    .btn-small {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+    }
+
+    .year-selector {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .brackets-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    .brackets-table th,
+    .brackets-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .brackets-table th {
+      background: #f9fafb;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .brackets-table tr:hover {
+      background: #f9fafb;
+    }
+
+    .status-active {
+      background: #10b981;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .status-inactive {
+      background: #6b7280;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 2rem;
+      color: #6b7280;
+    }
+
+    .error {
+      background: #fef2f2;
+      color: #b91c1c;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      border-left: 4px solid #ef4444;
+    }
+
+    .success {
+      background: #f0fdf4;
+      color: #166534;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      border-left: 4px solid #10b981;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .modal-title {
+      color: #1e3a8a;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #6b7280;
+    }
+
+    .close-btn:hover {
+      color: #374151;
+    }
+
+    .quick-actions {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .year-selector {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .quick-actions {
+        flex-direction: column;
+      }
+
+      .brackets-table {
+        font-size: 0.875rem;
+      }
+
+      .brackets-table th,
+      .brackets-table td {
+        padding: 0.5rem;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <button class="back-button" onclick="window.location.href='/admin'">← Back to Admin Dashboard</button>
+      <h1>📊 Tax Bracket Management</h1>
+      <p>Manage federal tax brackets for the tax savings calculator. Update brackets when the IRS releases new rates.</p>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="section">
+      <h2>Quick Actions</h2>
+      <div class="quick-actions">
+        <button class="btn btn-primary" onclick="openAddModal()">+ Add New Tax Bracket</button>
+        <button class="btn btn-success" onclick="seedCurrentYear()">Seed 2025 Tax Brackets</button>
+        <button class="btn btn-warning" onclick="duplicateYear()">Duplicate Year</button>
+      </div>
+    </div>
+
+    <!-- Year Selector -->
+    <div class="section">
+      <h2>Tax Year Selection</h2>
+      <div class="year-selector">
+        <label for="taxYear">Select Tax Year:</label>
+        <select id="taxYear" onchange="loadTaxBrackets()">
+          <option value="2025">2025</option>
+          <option value="2024">2024</option>
+          <option value="2026">2026</option>
+        </select>
+        <span id="yearStatus" class="status-active">Current Year</span>
+      </div>
+    </div>
+
+    <!-- Tax Brackets Table -->
+    <div class="section">
+      <h2>Tax Brackets</h2>
+      <div id="loadingState" class="loading">Loading tax brackets...</div>
+      <div id="errorState" class="error" style="display: none;"></div>
+      <div id="successState" class="success" style="display: none;"></div>
+      
+      <div id="bracketsContainer" style="display: none;">
+        <table class="brackets-table">
+          <thead>
+            <tr>
+              <th>Filing Status</th>
+              <th>Min Income</th>
+              <th>Max Income</th>
+              <th>Tax Rate</th>
+              <th>Label</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="bracketsTableBody">
+            <!-- Tax brackets will be loaded here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add/Edit Modal -->
+  <div id="bracketModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalTitle">Add New Tax Bracket</h3>
+        <button class="close-btn" onclick="closeModal()">&times;</button>
+      </div>
+      
+      <form id="bracketForm">
+        <input type="hidden" id="bracketId" value="">
+        
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="filingStatus">Filing Status *</label>
+            <select id="filingStatus" required>
+              <option value="">Select Status</option>
+              <option value="single">Single</option>
+              <option value="married">Married Filing Jointly</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="modalTaxYear">Tax Year *</label>
+            <input type="number" id="modalTaxYear" min="2020" max="2030" required>
+          </div>
+        </div>
+        
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="minIncome">Min Income ($) *</label>
+            <input type="number" id="minIncome" min="0" step="1" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="maxIncome">Max Income ($)</label>
+            <input type="number" id="maxIncome" min="0" step="1" placeholder="Leave empty for highest bracket">
+          </div>
+        </div>
+        
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="rate">Tax Rate (%) *</label>
+            <input type="number" id="rate" min="0" max="100" step="0.01" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="isActive">Status</label>
+            <select id="isActive">
+              <option value="true">Active</option>
+              <option value="false">Inactive</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="label">Display Label *</label>
+          <input type="text" id="label" placeholder="e.g., 22% ($48,476-$103,350)" required>
+        </div>
+        
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem; justify-content: flex-end;">
+          <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Tax Bracket</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    let currentTaxBrackets = [];
+    let isEditMode = false;
+
+    // Check authentication on page load
+    async function checkAuth() {
+      try {
+        const response = await fetch('/api/admin/status');
+        const data = await response.json();
+        
+        if (!data.isAuthenticated) {
+          window.location.href = '/admin';
+          return false;
+        }
+        return true;
+      } catch (error) {
+        console.error('Auth check failed:', error);
+        window.location.href = '/admin';
+        return false;
+      }
+    }
+
+    // Load tax brackets for selected year
+    async function loadTaxBrackets() {
+      const taxYear = document.getElementById('taxYear').value;
+      showLoading();
+      
+      try {
+        const response = await fetch(`/api/admin/tax-brackets/${taxYear}`);
+        
+        if (!response.ok) {
+          throw new Error('Failed to load tax brackets');
+        }
+        
+        const brackets = await response.json();
+        currentTaxBrackets = brackets;
+        displayTaxBrackets(brackets);
+        updateYearStatus(taxYear);
+        
+      } catch (error) {
+        showError('Failed to load tax brackets: ' + error.message);
+      }
+    }
+
+    // Display tax brackets in table
+    function displayTaxBrackets(brackets) {
+      const tableBody = document.getElementById('bracketsTableBody');
+      
+      if (brackets.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #6b7280; padding: 2rem;">No tax brackets found for this year. Click "Seed 2025 Tax Brackets" to add current IRS rates.</td></tr>';
+      } else {
+        tableBody.innerHTML = brackets.map(bracket => `
+          <tr>
+            <td><strong>${bracket.filingStatus === 'single' ? 'Single' : 'Married Filing Jointly'}</strong></td>
+            <td>$${bracket.minIncome.toLocaleString()}</td>
+            <td>${bracket.maxIncome ? '$' + bracket.maxIncome.toLocaleString() : 'No limit'}</td>
+            <td>${(parseFloat(bracket.rate) * 100).toFixed(2)}%</td>
+            <td>${bracket.label}</td>
+            <td><span class="status-${bracket.isActive ? 'active' : 'inactive'}">${bracket.isActive ? 'Active' : 'Inactive'}</span></td>
+            <td>
+              <div class="actions">
+                <button class="btn btn-small btn-warning" onclick="editBracket(${bracket.id})">Edit</button>
+                <button class="btn btn-small btn-danger" onclick="deleteBracket(${bracket.id})">Delete</button>
+              </div>
+            </td>
+          </tr>
+        `).join('');
+      }
+      
+      hideLoading();
+    }
+
+    // Update year status indicator
+    function updateYearStatus(year) {
+      const currentYear = new Date().getFullYear();
+      const statusElement = document.getElementById('yearStatus');
+      
+      if (parseInt(year) === currentYear) {
+        statusElement.className = 'status-active';
+        statusElement.textContent = 'Current Year';
+      } else if (parseInt(year) > currentYear) {
+        statusElement.className = 'status-inactive';
+        statusElement.textContent = 'Future Year';
+      } else {
+        statusElement.className = 'status-inactive';
+        statusElement.textContent = 'Past Year';
+      }
+    }
+
+    // Show loading state
+    function showLoading() {
+      document.getElementById('loadingState').style.display = 'block';
+      document.getElementById('bracketsContainer').style.display = 'none';
+      hideMessages();
+    }
+
+    // Hide loading state
+    function hideLoading() {
+      document.getElementById('loadingState').style.display = 'none';
+      document.getElementById('bracketsContainer').style.display = 'block';
+    }
+
+    // Show error message
+    function showError(message) {
+      document.getElementById('errorState').textContent = message;
+      document.getElementById('errorState').style.display = 'block';
+      document.getElementById('successState').style.display = 'none';
+      hideLoading();
+    }
+
+    // Show success message
+    function showSuccess(message) {
+      document.getElementById('successState').textContent = message;
+      document.getElementById('successState').style.display = 'block';
+      document.getElementById('errorState').style.display = 'none';
+    }
+
+    // Hide all messages
+    function hideMessages() {
+      document.getElementById('errorState').style.display = 'none';
+      document.getElementById('successState').style.display = 'none';
+    }
+
+    // Open add/edit modal
+    function openAddModal() {
+      isEditMode = false;
+      document.getElementById('modalTitle').textContent = 'Add New Tax Bracket';
+      document.getElementById('bracketForm').reset();
+      document.getElementById('bracketId').value = '';
+      document.getElementById('modalTaxYear').value = document.getElementById('taxYear').value;
+      document.getElementById('bracketModal').classList.add('show');
+    }
+
+    // Edit existing bracket
+    function editBracket(id) {
+      const bracket = currentTaxBrackets.find(b => b.id === id);
+      if (!bracket) return;
+      
+      isEditMode = true;
+      document.getElementById('modalTitle').textContent = 'Edit Tax Bracket';
+      document.getElementById('bracketId').value = bracket.id;
+      document.getElementById('filingStatus').value = bracket.filingStatus;
+      document.getElementById('modalTaxYear').value = bracket.taxYear;
+      document.getElementById('minIncome').value = bracket.minIncome;
+      document.getElementById('maxIncome').value = bracket.maxIncome || '';
+      document.getElementById('rate').value = (parseFloat(bracket.rate) * 100).toFixed(2);
+      document.getElementById('label').value = bracket.label;
+      document.getElementById('isActive').value = bracket.isActive.toString();
+      
+      document.getElementById('bracketModal').classList.add('show');
+    }
+
+    // Close modal
+    function closeModal() {
+      document.getElementById('bracketModal').classList.remove('show');
+    }
+
+    // Delete tax bracket
+    async function deleteBracket(id) {
+      if (!confirm('Are you sure you want to delete this tax bracket?')) return;
+      
+      try {
+        const response = await fetch(`/api/admin/tax-brackets/${id}`, {
+          method: 'DELETE'
+        });
+        
+        if (!response.ok) {
+          throw new Error('Failed to delete tax bracket');
+        }
+        
+        showSuccess('Tax bracket deleted successfully');
+        loadTaxBrackets();
+        
+      } catch (error) {
+        showError('Failed to delete tax bracket: ' + error.message);
+      }
+    }
+
+    // Handle form submission
+    document.getElementById('bracketForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = {
+        filingStatus: document.getElementById('filingStatus').value,
+        taxYear: parseInt(document.getElementById('modalTaxYear').value),
+        minIncome: parseInt(document.getElementById('minIncome').value),
+        maxIncome: document.getElementById('maxIncome').value ? parseInt(document.getElementById('maxIncome').value) : null,
+        rate: parseFloat(document.getElementById('rate').value) / 100,
+        label: document.getElementById('label').value,
+        isActive: document.getElementById('isActive').value === 'true'
+      };
+      
+      try {
+        const url = isEditMode ? 
+          `/api/admin/tax-brackets/${document.getElementById('bracketId').value}` : 
+          '/api/admin/tax-brackets';
+        const method = isEditMode ? 'PUT' : 'POST';
+        
+        const response = await fetch(url, {
+          method: method,
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+        
+        if (!response.ok) {
+          throw new Error('Failed to save tax bracket');
+        }
+        
+        closeModal();
+        showSuccess(`Tax bracket ${isEditMode ? 'updated' : 'created'} successfully`);
+        loadTaxBrackets();
+        
+      } catch (error) {
+        showError(`Failed to save tax bracket: ${error.message}`);
+      }
+    });
+
+    // Seed current year with 2025 tax brackets
+    async function seedCurrentYear() {
+      if (!confirm('This will add the 2025 IRS tax brackets. Continue?')) return;
+      
+      const brackets2025 = [
+        // Single filers
+        { filingStatus: 'single', taxYear: 2025, minIncome: 0, maxIncome: 11925, rate: 0.10, label: '10% ($0-$11,925)' },
+        { filingStatus: 'single', taxYear: 2025, minIncome: 11926, maxIncome: 48475, rate: 0.12, label: '12% ($11,926-$48,475)' },
+        { filingStatus: 'single', taxYear: 2025, minIncome: 48476, maxIncome: 103350, rate: 0.22, label: '22% ($48,476-$103,350)' },
+        { filingStatus: 'single', taxYear: 2025, minIncome: 103351, maxIncome: 197300, rate: 0.24, label: '24% ($103,351-$197,300)' },
+        { filingStatus: 'single', taxYear: 2025, minIncome: 197301, maxIncome: 250525, rate: 0.32, label: '32% ($197,301-$250,525)' },
+        { filingStatus: 'single', taxYear: 2025, minIncome: 250526, maxIncome: 626350, rate: 0.35, label: '35% ($250,526-$626,350)' },
+        { filingStatus: 'single', taxYear: 2025, minIncome: 626351, maxIncome: null, rate: 0.37, label: '37% ($626,351+)' },
+        
+        // Married filing jointly
+        { filingStatus: 'married', taxYear: 2025, minIncome: 0, maxIncome: 23850, rate: 0.10, label: '10% ($0-$23,850)' },
+        { filingStatus: 'married', taxYear: 2025, minIncome: 23851, maxIncome: 96950, rate: 0.12, label: '12% ($23,851-$96,950)' },
+        { filingStatus: 'married', taxYear: 2025, minIncome: 96951, maxIncome: 206700, rate: 0.22, label: '22% ($96,951-$206,700)' },
+        { filingStatus: 'married', taxYear: 2025, minIncome: 206701, maxIncome: 394600, rate: 0.24, label: '24% ($206,701-$394,600)' },
+        { filingStatus: 'married', taxYear: 2025, minIncome: 394601, maxIncome: 501050, rate: 0.32, label: '32% ($394,601-$501,050)' },
+        { filingStatus: 'married', taxYear: 2025, minIncome: 501051, maxIncome: 751600, rate: 0.35, label: '35% ($501,051-$751,600)' },
+        { filingStatus: 'married', taxYear: 2025, minIncome: 751601, maxIncome: null, rate: 0.37, label: '37% ($751,601+)' }
+      ];
+      
+      try {
+        for (const bracket of brackets2025) {
+          const response = await fetch('/api/admin/tax-brackets', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ ...bracket, isActive: true })
+          });
+          
+          if (!response.ok) {
+            throw new Error(`Failed to create bracket: ${bracket.label}`);
+          }
+        }
+        
+        showSuccess('2025 tax brackets seeded successfully!');
+        document.getElementById('taxYear').value = '2025';
+        loadTaxBrackets();
+        
+      } catch (error) {
+        showError('Failed to seed tax brackets: ' + error.message);
+      }
+    }
+
+    // Duplicate year functionality
+    async function duplicateYear() {
+      const fromYear = prompt('Enter the year to copy FROM:');
+      const toYear = prompt('Enter the year to copy TO:');
+      
+      if (!fromYear || !toYear) return;
+      
+      try {
+        const response = await fetch(`/api/admin/tax-brackets/${fromYear}`);
+        if (!response.ok) {
+          throw new Error('Failed to load source year brackets');
+        }
+        
+        const sourceBrackets = await response.json();
+        if (sourceBrackets.length === 0) {
+          throw new Error('No brackets found for source year');
+        }
+        
+        for (const bracket of sourceBrackets) {
+          const newBracket = {
+            filingStatus: bracket.filingStatus,
+            taxYear: parseInt(toYear),
+            minIncome: bracket.minIncome,
+            maxIncome: bracket.maxIncome,
+            rate: bracket.rate,
+            label: bracket.label.replace(fromYear, toYear),
+            isActive: bracket.isActive
+          };
+          
+          const createResponse = await fetch('/api/admin/tax-brackets', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newBracket)
+          });
+          
+          if (!createResponse.ok) {
+            throw new Error(`Failed to create bracket for ${toYear}`);
+          }
+        }
+        
+        showSuccess(`Tax brackets duplicated from ${fromYear} to ${toYear}!`);
+        document.getElementById('taxYear').value = toYear;
+        loadTaxBrackets();
+        
+      } catch (error) {
+        showError('Failed to duplicate brackets: ' + error.message);
+      }
+    }
+
+    // Initialize page
+    async function init() {
+      const authenticated = await checkAuth();
+      if (authenticated) {
+        loadTaxBrackets();
+      }
+    }
+
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', init);
+
+    // Close modal when clicking outside
+    document.getElementById('bracketModal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('bracketModal')) {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>
