@@ -1,0 +1,19 @@
+{
+  "name": "mb-capital-group",
+  "version": "1.0.0",
+  "description": "MB Capital Group - Multifamily Real Estate Investment Platform",
+  "main": "simple-server.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node simple-server.js",
+    "dev": "node simple-server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "keywords": ["real-estate", "multifamily", "investment", "syndication"],
+  "author": "MB Capital Group",
+  "license": "MIT"
+}
