@@ -3,7 +3,7 @@ services:
     name: mb-capital-group
     env: node
     buildCommand: npm install
-    startCommand: node server.js
+    startCommand: node production-server.js
     envVars:
       - key: NODE_ENV
         value: production
