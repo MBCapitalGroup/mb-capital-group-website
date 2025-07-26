@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: mb-capital-group
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: mbcapital_database
+          property: connectionString
+      - key: SENDGRID_API_KEY
+        sync: false
+      - key: GOOGLE_ANALYTICS_CREDENTIALS
+        sync: false
+      - key: GOOGLE_ANALYTICS_PROPERTY_ID
+        value: "11477941008"
+      - key: VITE_GA_MEASUREMENT_ID
+        value: "G-ZC83SHQLM3"
+      - key: SESSION_SECRET
+        generateValue: true
+    domains:
+      - www.mbcapitalgroup.com
+
+databases:
+  - name: mbcapital_database
+    databaseName: mbcapital_database
+    user: mbcapital_database_user
