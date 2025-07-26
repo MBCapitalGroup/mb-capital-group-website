@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - MB Capital Group</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="min-h-screen">
+        <nav class="bg-white shadow">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="flex justify-between h-16">
+                    <div class="flex items-center">
+                        <h1 class="text-xl font-semibold">MB Capital Group - Admin Dashboard</h1>
+                    </div>
+                    <div class="flex items-center">
+                        <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">
+                            Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+            <div class="px-4 py-6 sm:px-0">
+                <div class="border-4 border-dashed border-gray-200 rounded-lg h-96 flex items-center justify-center">
+                    <div class="text-center">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4">Welcome to Admin Dashboard</h2>
+                        <p class="text-gray-600 mb-6">Your MB Capital Group admin panel is ready for deployment.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-md mx-auto">
+                            <div class="bg-blue-100 p-4 rounded">
+                                <h3 class="font-semibold">Users</h3>
+                                <p class="text-2xl">1</p>
+                            </div>
+                            <div class="bg-green-100 p-4 rounded">
+                                <h3 class="font-semibold">Markets</h3>
+                                <p class="text-2xl">2</p>
+                            </div>
+                            <div class="bg-yellow-100 p-4 rounded">
+                                <h3 class="font-semibold">Status</h3>
+                                <p class="text-sm">Active</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function logout() {
+            fetch('/api/auth/logout', { method: 'POST' })
+                .then(() => {
+                    window.location.href = '/admin/login';
+                });
+        }
+    </script>
+</body>
+</html>
