@@ -2,8 +2,9 @@ services:
   - type: web
     name: mb-capital-group
     env: node
-    buildCommand: npm install
+    buildCommand: npm install --production
     startCommand: node production-server.js
+    publishPath: .
     envVars:
       - key: NODE_ENV
         value: production

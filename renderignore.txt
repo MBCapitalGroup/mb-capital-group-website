@@ -1,0 +1,10 @@
+# Ignore files that shouldn't be processed by Render
+vite.config.ts
+tsconfig.json
+client/
+server/
+shared/
+*.ts
+*.tsx
+node_modules/
+.git/
