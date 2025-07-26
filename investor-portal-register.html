@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investor Portal Registration - MB Capital Group</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo h1 {
+            color: #1e3a8a;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        
+        .logo p {
+            color: #64748b;
+            font-size: 14px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #374151;
+            font-weight: 500;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+        
+        .password-container {
+            position: relative;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 12px;
+            cursor: pointer;
+            color: #64748b;
+        }
+        
+        .btn {
+            background: #3b82f6;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background: #2563eb;
+        }
+        
+        .btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+        
+        .error {
+            color: #dc2626;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        .success {
+            color: #059669;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            color: #64748b;
+            margin-top: 10px;
+        }
+        
+        .terms {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 15px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <h1>MB Capital Group</h1>
+            <p>Investor Portal Registration</p>
+        </div>
+        
+        <form id="registrationForm">
+            <div class="form-group">
+                <label for="firstName">First Name *</label>
+                <input type="text" id="firstName" name="firstName" required>
+                <div class="error" id="firstNameError"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="lastName">Last Name *</label>
+                <input type="text" id="lastName" name="lastName" required>
+                <div class="error" id="lastNameError"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required readonly>
+                <div class="error" id="emailError"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" required>
+                <div class="error" id="phoneError"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password *</label>
+                <div class="password-container">
+                    <input type="password" id="password" name="password" required minlength="6">
+                    <span class="password-toggle" onclick="togglePassword()">👁️</span>
+                </div>
+                <div class="error" id="passwordError"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password *</label>
+                <div class="password-container">
+                    <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6">
+                    <span class="password-toggle" onclick="toggleConfirmPassword()">👁️</span>
+                </div>
+                <div class="error" id="confirmPasswordError"></div>
+            </div>
+            
+            <button type="submit" class="btn" id="submitBtn">Complete Registration</button>
+            
+            <div class="loading" id="loading">
+                Setting up your investor portal access...
+            </div>
+            
+            <div class="success" id="successMessage"></div>
+            <div class="error" id="generalError"></div>
+        </form>
+        
+        <div class="terms">
+            By registering, you agree to MB Capital Group's terms of service and privacy policy. 
+            Your information will be used solely for investment communication and portal access.
+        </div>
+    </div>
+
+    <script>
+        // Get token from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+        
+        if (!token) {
+            document.getElementById('generalError').textContent = 'Invalid or missing invitation token. Please check your invitation email.';
+            document.getElementById('submitBtn').disabled = true;
+        }
+        
+        // Password toggle functions
+        function togglePassword() {
+            const passwordField = document.getElementById('password');
+            const toggleIcon = passwordField.parentElement.querySelector('.password-toggle');
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggleIcon.textContent = '🙈';
+            } else {
+                passwordField.type = 'password';
+                toggleIcon.textContent = '👁️';
+            }
+        }
+        
+        function toggleConfirmPassword() {
+            const passwordField = document.getElementById('confirmPassword');
+            const toggleIcon = passwordField.parentElement.querySelector('.password-toggle');
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggleIcon.textContent = '🙈';
+            } else {
+                passwordField.type = 'password';
+                toggleIcon.textContent = '👁️';
+            }
+        }
+        
+        // Load invitation data
+        async function loadInvitationData() {
+            if (!token) return;
+            
+            try {
+                const response = await fetch(`/api/public/invitation/${token}`);
+                if (response.ok) {
+                    const invitationData = await response.json();
+                    document.getElementById('firstName').value = invitationData.firstName || '';
+                    document.getElementById('lastName').value = invitationData.lastName || '';
+                    document.getElementById('email').value = invitationData.email || '';
+                } else {
+                    document.getElementById('generalError').textContent = 'Invalid or expired invitation token.';
+                    document.getElementById('submitBtn').disabled = true;
+                }
+            } catch (error) {
+                console.error('Error loading invitation data:', error);
+                document.getElementById('generalError').textContent = 'Error loading invitation data. Please try again.';
+            }
+        }
+        
+        // Form validation
+        function validateForm() {
+            let isValid = true;
+            
+            // Clear previous errors
+            document.querySelectorAll('.error').forEach(el => el.textContent = '');
+            
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (!firstName) {
+                document.getElementById('firstNameError').textContent = 'First name is required';
+                isValid = false;
+            }
+            
+            if (!lastName) {
+                document.getElementById('lastNameError').textContent = 'Last name is required';
+                isValid = false;
+            }
+            
+            if (!email) {
+                document.getElementById('emailError').textContent = 'Email is required';
+                isValid = false;
+            }
+            
+            if (!phone) {
+                document.getElementById('phoneError').textContent = 'Phone number is required';
+                isValid = false;
+            }
+            
+            if (!password || password.length < 6) {
+                document.getElementById('passwordError').textContent = 'Password must be at least 6 characters';
+                isValid = false;
+            }
+            
+            if (password !== confirmPassword) {
+                document.getElementById('confirmPasswordError').textContent = 'Passwords do not match';
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+        
+        // Form submission
+        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!validateForm()) {
+                return;
+            }
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const loading = document.getElementById('loading');
+            const successMessage = document.getElementById('successMessage');
+            const generalError = document.getElementById('generalError');
+            
+            // Clear previous messages
+            successMessage.textContent = '';
+            generalError.textContent = '';
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            loading.style.display = 'block';
+            
+            try {
+                const formData = {
+                    token: token,
+                    firstName: document.getElementById('firstName').value.trim(),
+                    lastName: document.getElementById('lastName').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    phone: document.getElementById('phone').value.trim(),
+                    password: document.getElementById('password').value
+                };
+                
+                const response = await fetch('/api/public/register-investor', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    successMessage.textContent = 'Registration successful! You can now access your investor portal.';
+                    document.getElementById('registrationForm').style.display = 'none';
+                    
+                    // Redirect to login page after 3 seconds
+                    setTimeout(() => {
+                        window.location.href = '/investor-portal/login';
+                    }, 3000);
+                } else {
+                    generalError.textContent = result.error || 'Registration failed. Please try again.';
+                }
+            } catch (error) {
+                console.error('Registration error:', error);
+                generalError.textContent = 'Network error. Please check your connection and try again.';
+            } finally {
+                submitBtn.disabled = false;
+                loading.style.display = 'none';
+            }
+        });
+        
+        // Load invitation data when page loads
+        loadInvitationData();
+    </script>
+</body>
+</html>

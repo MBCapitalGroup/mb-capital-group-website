@@ -1,0 +1,151 @@
+<!-- investor-registration.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Investor Registration - MB Capital Group</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+  <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
+      <div>
+        <img class="mx-auto h-12 w-auto" src="/logo.png" alt="MB Capital Group">
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          Complete Your Registration
+        </h2>
+        <p class="mt-2 text-center text-sm text-gray-600">
+          Welcome to the MB Capital Group Investor Portal
+        </p>
+      </div>
+      
+      <div id="registration-form" class="mt-8 space-y-6">
+        <div class="rounded-md shadow-sm -space-y-px">
+          <div>
+            <label for="firstName" class="sr-only">First Name</label>
+            <input id="firstName" name="firstName" type="text" required 
+                   class="relative block w-full px-3 py-2 border border-gray-300 rounded-t-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" 
+                   placeholder="First Name">
+          </div>
+          <div>
+            <label for="lastName" class="sr-only">Last Name</label>
+            <input id="lastName" name="lastName" type="text" required 
+                   class="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" 
+                   placeholder="Last Name">
+          </div>
+          <div>
+            <label for="email" class="sr-only">Email</label>
+            <input id="email" name="email" type="email" required readonly
+                   class="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 bg-gray-100 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" 
+                   placeholder="Email address">
+          </div>
+          <div>
+            <label for="phone" class="sr-only">Phone</label>
+            <input id="phone" name="phone" type="tel" required 
+                   class="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" 
+                   placeholder="Phone number">
+          </div>
+          <div>
+            <label for="password" class="sr-only">Password</label>
+            <input id="password" name="password" type="password" required 
+                   class="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" 
+                   placeholder="Create password">
+          </div>
+          <div>
+            <label for="confirmPassword" class="sr-only">Confirm Password</label>
+            <input id="confirmPassword" name="confirmPassword" type="password" required 
+                   class="relative block w-full px-3 py-2 border border-gray-300 rounded-b-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" 
+                   placeholder="Confirm password">
+          </div>
+        </div>
+
+        <div>
+          <button type="submit" onclick="submitRegistration()" 
+                  class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Complete Registration
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Get invitation token from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    
+    if (!token) {
+      alert('Invalid invitation link');
+      window.location.href = '/';
+    }
+    
+    // Validate invitation on page load
+    async function validateInvitation() {
+      try {
+        const response = await fetch(`/api/invitations/validate/${token}`);
+        const result = await response.json();
+        
+        if (response.ok && result.valid) {
+          // Pre-fill form with invitation data
+          document.getElementById('firstName').value = result.firstName;
+          document.getElementById('lastName').value = result.lastName;
+          document.getElementById('email').value = result.email;
+        } else {
+          alert(result.error || 'Invalid invitation');
+          window.location.href = '/';
+        }
+      } catch (error) {
+        console.error('Error validating invitation:', error);
+        alert('Error validating invitation');
+        window.location.href = '/';
+      }
+    }
+    
+    // Submit registration
+    async function submitRegistration() {
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      
+      if (password !== confirmPassword) {
+        alert('Passwords do not match');
+        return;
+      }
+      
+      const registrationData = {
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        password: password,
+        token: token
+      };
+      
+      try {
+        const response = await fetch('/api/public/register-investor', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(registrationData)
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok) {
+          alert('Registration successful! You can now log in to the investor portal.');
+          window.location.href = '/investor-portal';
+        } else {
+          alert('Error: ' + (result.error || 'Registration failed'));
+        }
+      } catch (error) {
+        console.error('Error during registration:', error);
+        alert('Error during registration');
+      }
+    }
+    
+    // Validate invitation on page load
+    validateInvitation();
+  </script>
+</body>
+</html>
